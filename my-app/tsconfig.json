@@ -14,7 +14,19 @@
         "isolatedModules": true,
         "noEmit": true,
         "jsx": "react-jsx",
-        "types": ["vitest/globals"]
+        "types": ["vitest/globals", "node", "vite/client"],
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/*"],
+            "@public/*": ["./public/*"],
+            "@components/*": ["./src/components/*"],
+            "@constants/*": ["./src/constants/*"],
+            "@hooks/*": ["./src/hooks/*"],
+            "@pages/*": ["./src/pages/*"],
+            "@redux/*": ["./src/redux/*"],
+            "@types/*": ["./src/types/*"],
+            "@utils/*": ["./src/utils/*"]
+        }
     },
     "references": [{ "path": "./tsconfig.node.json" }]
 }
