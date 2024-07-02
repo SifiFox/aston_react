@@ -1,0 +1,29 @@
+.pageWrapper{
+  padding: 0 20px;
+  overflow: hidden;
+  height: 100%;
+  position: relative;
+  min-height: 100svh;
+}
+
+.pageTitleWrapper{
+  position: relative;
+}
+
+
+.pageTitle{
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+
+  font-size: 15vw;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: var(--secondary-color);
+  opacity: 0.3;
+}
+.pageContent{
+  position: relative;
+  z-index: 1;
+}
