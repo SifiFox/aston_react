@@ -1,11 +1,17 @@
-import { Button, Result } from "antd";
-import { Page } from "@/features/page";
+import { Header } from "@/widgets/header";
+import cls from "@pages/ui/page.module.scss";
 
 
-export const NotFoundPage = () => {
+export const NotFoundPage = ({title}) => {
   return (
-    <Page title={'NotFound'}>
-      <span>404</span>
-    </Page>
-  )
-}
+    <>
+      <Header />
+      <div className={cls.pageWrapper}>
+        <h1 className={cls.pageTitle}>{title}</h1>
+        <div className={cls.pageContent}>
+          <span>404</span>
+        </div>
+      </div>
+    </>
+  );
+};

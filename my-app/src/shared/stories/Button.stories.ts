@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react";
 import { Button } from "antd";
-import { BaseButtonProps } from "antd/es/button/button";
+import type { BaseButtonProps } from "antd/es/button/button";
 
 const meta: Meta<BaseButtonProps> = {
   title: "Components/Button",

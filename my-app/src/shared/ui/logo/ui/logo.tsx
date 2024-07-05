@@ -1,10 +1,18 @@
-import { FC } from "react";
+import cls from "./logo.module.scss";
+import logoSrc from "@/shared/assets/icons/logo.png";
+import { Link, useLocation } from "react-router-dom";
 
-interface LogoProps {
-  linked: boolean
-}
 
-export const Logo: FC<LogoProps> = (props) => {
-  const {linked} = props
-  return linked ? <span>Logo</span> : <a>Logo</a>
-}
+export const Logo = () => {
+  const location = useLocation();
+
+  return (
+    <div className={cls.logoWrapper}>
+      {
+        location.pathname === "/"
+          ? <img src={logoSrc} alt="" />
+          : <Link to={"/"}><img src={logoSrc} alt="" /></Link>
+      }
+    </div>
+  );
+};

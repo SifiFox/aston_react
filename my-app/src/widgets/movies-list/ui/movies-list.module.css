@@ -1,0 +1,23 @@
+.moviesList {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-content: center;
+  grid-gap: 20px;
+}
+@media screen and (max-width: 1240px) {
+  .moviesList {
+    grid-template-columns: repeat(3, auto);
+  }
+}
+@media screen and (max-width: 930px) {
+  .moviesList {
+    grid-template-columns: repeat(2, auto);
+  }
+}
+@media screen and (max-width: 620px) {
+  .moviesList {
+    grid-template-columns: repeat(1, auto);
+  }
+}
+
+/*# sourceMappingURL=movies-list.module.css.map */

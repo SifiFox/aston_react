@@ -1,7 +1,10 @@
-import { AppRoutesProps, RouteConfig } from "@/shared/config/route-config/route-config";
+import type { AppRoutesProps} from "@/shared/config/route-config/route-config";
+import { RouteConfig } from "@/shared/config/route-config/route-config";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "antd";
-import { useCallback } from "react";
+import { Suspense, useCallback } from "react";
+import { Loading } from "@/shared/ui/loading";
+
 
 
 export const AppRouter = () => {
@@ -10,6 +13,7 @@ export const AppRouter = () => {
     return (
       <Route
         key={route.path}
+        // TODO: будет дописано, когда реализую авторизацию
         // element={route.authOnly ? <RequireAuth>{element}</RequireAuth> : element}
         element={element}
         path={route.path}
@@ -19,9 +23,11 @@ export const AppRouter = () => {
 
   return (
     <BrowserRouter>
-      <Routes>
-        {Object.values(RouteConfig).map(renderWithWrapper)}
-      </Routes>
+      <Suspense fallback={<Loading/>}>
+        <Routes>
+          {Object.values(RouteConfig).map(renderWithWrapper)}
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 };
