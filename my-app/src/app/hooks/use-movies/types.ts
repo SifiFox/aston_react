@@ -14,13 +14,13 @@ interface Genre {
 
 export interface MovieDetails {
   completed: boolean,
-  countries: any[],
+  countries: Country[],
   coverUrl: string | null,
   description: string | null,
   editorAnnotation: string | null,
   endYear: string | null,
   filmLength: number,
-  genres: any[],
+  genres: Genre[],
   has3D: boolean,
   hasImax: boolean,
   imdbId: string,

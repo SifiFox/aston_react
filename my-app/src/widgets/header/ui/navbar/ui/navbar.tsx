@@ -3,9 +3,12 @@ import cls from "./navbar.module.scss";
 import classNames from "classnames";
 import { RouteConfig } from "@/shared/config/route-config/route-config";
 
+const navbarItems = [RouteConfig.home, RouteConfig.test]
+
 export const Navbar = () => {
   const location = useLocation()
-  const navbarItems = [RouteConfig.home, RouteConfig.test]
+
+
   return (
     <nav>
       <ul className={cls.navbar}>

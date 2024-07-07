@@ -3,8 +3,8 @@ import cls from "@/widgets/movie/ui/movie.module.scss";
 
 export const MovieInfoList = (props) => {
   const {movie} = props
-
   const rows = [];
+
   for (const key in movie) {
     if (Object.getOwnPropertyDescriptor(movie, key)) {
       const title = MovieInfoTitles[key.toUpperCase() as keyof typeof MovieInfoTitles];

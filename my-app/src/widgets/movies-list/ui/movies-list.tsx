@@ -1,10 +1,7 @@
 import { MovieCard } from "@/shared/ui/movie-card";
 import cls from './movies-list.module.scss'
-import type { FC } from "react";
 
-
-
-export const MoviesList: FC<{ movies }> = (props) => {
+export const MoviesList = (props: { movies }) => {
   const {movies} = props
   return (
     <div className={cls.moviesList}>
