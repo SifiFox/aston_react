@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} on Pull Request
 on: 
   pull_request:
     branches:
-      - main
+      - home
   workflow_dispatch:
   
 jobs:

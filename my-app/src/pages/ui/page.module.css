@@ -1,0 +1,87 @@
+.pageWrapper {
+  margin-top: 100px;
+  padding: 100px 20px;
+  height: 100%;
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  user-select: none;
+}
+
+.pageTitleWrapper {
+  position: relative;
+}
+
+.pageTitle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  font-size: 15vw;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: var(--secondary-color);
+  opacity: 0.3;
+}
+
+.pageContent {
+  position: relative;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 40px;
+  z-index: 1;
+}
+
+.totalMovies {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+  color: var(--inverted-bg-color);
+}
+.totalMovies h3 {
+  font-weight: 800;
+  font-size: 72px;
+}
+.totalMovies p {
+  font-size: 48px;
+  font-weight: 600;
+}
+@media screen and (max-width: 680px) {
+  .totalMovies h3 {
+    font-size: 48px;
+  }
+  .totalMovies p {
+    font-size: 32px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .totalMovies h3 {
+    font-size: 24px;
+  }
+  .totalMovies p {
+    font-size: 16px;
+  }
+}
+
+.movie {
+  width: 100%;
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.moviePoster {
+  width: 50%;
+}
+
+.movieInfo {
+  width: 50%;
+}
+
+/*# sourceMappingURL=page.module.css.map */

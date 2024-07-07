@@ -1,0 +1,15 @@
+.navActions {
+  display: flex;
+  gap: 20px;
+}
+@media screen and (max-width: 860px) {
+  .navActions {
+    position: fixed;
+    flex-direction: column;
+    right: 20px;
+    top: 40px;
+    gap: 10px;
+  }
+}
+
+/*# sourceMappingURL=nav-actions.module.css.map */
