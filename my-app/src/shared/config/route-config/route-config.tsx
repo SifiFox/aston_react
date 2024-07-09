@@ -1,47 +1,64 @@
 import type { RouteProps } from "react-router-dom";
 import { NotFoundPage } from "@pages/ui/not-found-page";
 import { MainPageAsync } from "@pages/ui/main-page";
-import { TestPageAsync } from "@pages/ui/test-page/test-page.async";
+import { FavouritesPageAsync } from "@pages/ui/favourites-page/favourites-page.async";
 import { MoviePageAsync } from "@pages/ui/movie-page";
+import {LoginPage} from "@pages/ui/login-page";
+import {RegistrationPage} from "@pages/ui/registration-page";
 
 export type AppRoutesProps = RouteProps & {
   title: string,
-  authOnly?: boolean,
+  authOnly?: boolean
 }
 
 export enum AppRoutes {
   HOME = "home",
   MOVIE = 'movie',
-  TEST = "test",
-  NOT_FOUND = "not_found"
+  FAVOURITES = "favourites",
+  NOT_FOUND = "not_found",
+  LOGIN = 'login',
+  REGISTRATION = 'registration'
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.HOME]: "/",
   [AppRoutes.MOVIE]: "/",
-  [AppRoutes.TEST]: "/test",
+  [AppRoutes.FAVOURITES]: "/favourites",
+  [AppRoutes.LOGIN]: "/login",
+  [AppRoutes.REGISTRATION]: "/registration",
   [AppRoutes.NOT_FOUND]: "*"
 };
 
 export const RouteConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.HOME]: {
     path: RoutePath.home,
-    title: "Home",
-    element: <MainPageAsync title="Home" />,
+    title: "Главная",
+    element: <MainPageAsync title="Главная" />,
   },
   [AppRoutes.MOVIE]: {
     path: `${RoutePath.movie}:id`,
-    title: "Movie",
-    element: <MoviePageAsync title="Movie" />,
+    title: "Фильм",
+    element: <MoviePageAsync title="Фильм" />,
   },
-  [AppRoutes.TEST]: {
-    path: RoutePath.test,
-    title: "Test",
-    element: <TestPageAsync title={"Test"} />,
+  [AppRoutes.LOGIN]: {
+    path: RoutePath.login,
+    title: "Login",
+    element: <LoginPage title="Логин" />
+  },
+  [AppRoutes.REGISTRATION]: {
+    path: RoutePath.registration,
+    title: "Создать аккаунт",
+    element: <RegistrationPage title="Создать аккаунт" />
+  },
+  [AppRoutes.FAVOURITES]: {
+    path: RoutePath.favourites,
+    title: "Избранные",
+    element: <FavouritesPageAsync title={"Изрбранные"} />,
+    authOnly: true
   },
   [AppRoutes.NOT_FOUND]: {
     path: RoutePath.not_found,
-    title: "Not found",
-    element: <NotFoundPage title={"NotFound"} />,
+    title: "Не найдено",
+    element: <NotFoundPage title={"Не найдено"} />,
   }
 };

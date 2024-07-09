@@ -60,7 +60,6 @@ export interface MovieDetails {
   year: number,
 }
 
-// TODO: эти мне еще нужны
 export interface MovieBase {
   countries: Country[],
   genres: Genre[],

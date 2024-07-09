@@ -10,12 +10,12 @@ export const NavActions = () => {
     <div className={cls.navActions}>
       <Link to={'/login'}
             children={
-              <Button icon={<LoginOutlined />}>{isDesktop && 'Login'}</Button>
+              <Button icon={<LoginOutlined />}>{isDesktop && 'Войти'}</Button>
             }
       />
       <Link to={'/registration'}
             children={
-              <Button icon={<UserAddOutlined />}>{isDesktop && 'Registration'}</Button>
+              <Button icon={<UserAddOutlined />}>{isDesktop && 'Регистрация'}</Button>
             }
       />
     </div>

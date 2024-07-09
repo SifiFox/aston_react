@@ -4,8 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "antd";
 import { Suspense, useCallback } from "react";
 import { Loading } from "@/shared/ui/loading";
-
-
+import {RequireAuth} from "@/app/providers/router/require-auth";
 
 export const AppRouter = () => {
   const renderWithWrapper = useCallback((route: AppRoutesProps) => {
@@ -13,9 +12,7 @@ export const AppRouter = () => {
     return (
       <Route
         key={route.path}
-        // TODO: будет дописано, когда реализую авторизацию
-        // element={route.authOnly ? <RequireAuth>{element}</RequireAuth> : element}
-        element={element}
+        element={route.authOnly ? <RequireAuth>{element}</RequireAuth> : element}
         path={route.path}
       />
     );

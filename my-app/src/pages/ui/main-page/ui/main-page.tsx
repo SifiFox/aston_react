@@ -13,7 +13,7 @@ const MainPage = ({ title }) => {
         <h1 className={cls.pageTitle}>{title}</h1>
         <div className={cls.pageContent}>
           <div className={cls.totalMovies}>
-            <h3>Total items: </h3>
+            <h3>Всего: </h3>
             <p>{total}</p>
           </div>
           {

@@ -8,7 +8,6 @@ export interface APIParams {
   postfix?: Postfixes
 }
 
-//TODO: временное решение, когда перенесу на RTK Query - будет нормально типизорвано и дописано
 export function useMovies(params: APIParams): unknown {
   const [movies, setMovies] = useState([]);
 

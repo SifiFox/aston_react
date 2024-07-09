@@ -1,12 +1,12 @@
 import { Card } from "antd";
 import type { FC } from "react";
-import type { Movie } from "@/shared/assets/temporal/const";
 import cls from './movie-card.module.scss'
 import { Link } from "react-router-dom";
+import {type MovieBase} from "@/app/hooks/use-movies/types";
 const { Meta } = Card;
 
 interface MovieCardProps {
-  movie: Movie
+  movie: MovieBase
 }
 
 export const MovieCard: FC<MovieCardProps> = (props) => {

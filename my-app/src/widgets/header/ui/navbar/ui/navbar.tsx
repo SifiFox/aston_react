@@ -5,7 +5,8 @@ import { RouteConfig } from "@/shared/config/route-config/route-config";
 
 export const Navbar = () => {
   const location = useLocation()
-  const navbarItems = [RouteConfig.home, RouteConfig.test]
+  const navbarItems = [RouteConfig.home, RouteConfig.favourites]
+
   return (
     <nav>
       <ul className={cls.navbar}>

@@ -1,10 +1,11 @@
 import React from "react"
-import { createRoot } from "react-dom/client"
+import {createRoot} from "react-dom/client"
 
 import 'antd/dist/reset.css'
 import '@/app/styles/index.scss'
 
 import App from "./app/App"
+import "@/shared/config/firebase-config/firebase-config"
 
 const container = document.getElementById("root")
 
@@ -13,7 +14,7 @@ if (container) {
 
     root.render(
         <React.StrictMode>
-          <App />
+            <App/>
         </React.StrictMode>,
     )
 } else {
