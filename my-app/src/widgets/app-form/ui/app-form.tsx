@@ -1,9 +1,7 @@
-import cls from './app-form.module.scss'
+import { type ReactNode } from "react"
 
-export const AppForm = ({children}) => {
-    return (
-        <div className={cls.form}>
-            {children}
-        </div>
-    )
+import cls from "./app-form.module.scss"
+
+export const AppForm = ({ children }: ReactNode) => {
+    return <div className={cls.form}>{children}</div>
 }

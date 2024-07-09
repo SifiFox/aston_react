@@ -1,96 +1,92 @@
 .pageWrapper {
-  margin-top: 100px;
-  padding: 100px 20px;
-  height: 100%;
-  position: relative;
-  min-height: 100svh;
+    margin-top: 100px;
+    padding: 100px 20px;
+    height: 100%;
+    position: relative;
+    min-height: 100svh;
 
-  overflow: hidden;
+    overflow: hidden;
 
-  user-select: none;
+    user-select: none;
 }
 
 .pageTitleWrapper {
-  position: relative;
+    position: relative;
 }
 
-
 .pageTitle {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
 
-  font-size: 15vw;
-  font-weight: 900;
-  letter-spacing: 0.1em;
-  color: var(--secondary-color);
-  opacity: 0.3;
+    font-size: 15vw;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    color: var(--secondary-color);
+    opacity: 0.3;
 }
 
 .pageContent {
-  position: relative;
-  max-width: 1280px;
-  margin-left: auto;
-  margin-right: auto;
+    position: relative;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
 
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  gap: 40px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 40px;
 
-
-  z-index: 1;
+    z-index: 1;
 }
 
 .totalMovies {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 20px;
-  color: var(--inverted-bg-color);
-  h3 {
-    font-weight: 800;
-    font-size: 72px;
-  }
-
-  p {
-    font-size: 48px;
-    font-weight: 600;
-  }
-
-  @media screen and (max-width: 680px) {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+    color: var(--inverted-bg-color);
     h3 {
-      font-size: 48px;
+        font-weight: 800;
+        font-size: 72px;
     }
+
     p {
-      font-size: 32px;
+        font-size: 48px;
+        font-weight: 600;
     }
-  }
-  @media screen and (max-width: 480px) {
-    h3 {
-      font-size: 24px;
+
+    @media screen and (max-width: 680px) {
+        h3 {
+            font-size: 48px;
+        }
+        p {
+            font-size: 32px;
+        }
     }
-    p {
-      font-size: 16px;
+    @media screen and (max-width: 480px) {
+        h3 {
+            font-size: 24px;
+        }
+        p {
+            font-size: 16px;
+        }
     }
-  }
 }
 
-
-
-.movie{
-  width: 100%;
-  display: flex;
-  gap: 40px;
-  justify-content: space-between;
+.movie {
+    width: 100%;
+    display: flex;
+    gap: 40px;
+    justify-content: space-between;
 }
 
-.moviePoster{
-  width: 50%;
+.moviePoster {
+    width: 50%;
 }
 
-.movieInfo{
-  width: 50%;
+.movieInfo {
+    width: 50%;
 }

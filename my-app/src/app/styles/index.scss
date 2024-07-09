@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800;900&display=swap");
 
 @import url(./variables/global.scss);
 @import url(reset.scss);
@@ -6,9 +6,6 @@
 @import url(./themes/dark.scss);
 
 .app {
-  padding-bottom: var(--xl);
-  background: var(--bg-color);
-
+    padding-bottom: var(--xl);
+    background: var(--bg-color);
 }
-
-

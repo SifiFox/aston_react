@@ -1,13 +1,12 @@
-.navActions{
-  display: flex;
-  gap: 20px;
-  
-  
-  @media screen and (max-width: 860px) {
-    position: fixed;
-    flex-direction: column;
-    right: 20px;
-    top: 40px;
-    gap: 10px;
-  }
+.navActions {
+    display: flex;
+    gap: 20px;
+
+    @media screen and (max-width: 860px) {
+        position: fixed;
+        flex-direction: column;
+        right: 20px;
+        top: 40px;
+        gap: 10px;
+    }
 }

@@ -1,15 +1,16 @@
-import {Header} from "@/widgets/header";
-import cls from "@pages/ui/page.module.scss";
-import {AppForm} from "@/widgets/app-form";
-import {RegistrationForm} from "@pages/ui/registration-page/ui/registration-form/registration-form";
-import {useAuth} from "@/app/hooks/use-auth/use-auth";
-import {useEffect} from "react";
-import {useNavigate} from "react-router-dom";
-import {RoutePath} from "@/shared/config/route-config/route-config";
-import {loginWithGoogle, registration} from "@/shared/api/api";
+import { useAuth } from "@/app/hooks/use-auth/use-auth"
+import { loginWithGoogle, registration } from "@/shared/api/api"
+import { RoutePath } from "@/shared/config/route-config/route-config"
+import { AppForm } from "@/widgets/app-form"
+import { Header } from "@/widgets/header"
+import { type PageProps } from "@pages/types/types"
+import cls from "@pages/ui/page.module.scss"
+import { RegistrationForm } from "@pages/ui/registration-page/ui/registration-form/registration-form"
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
-export const RegistrationPage = ({title}) => {
-    const {isAuth} = useAuth()
+export const RegistrationPage = ({ title }: PageProps) => {
+    const { isAuth } = useAuth()
     const navigation = useNavigate()
 
     useEffect(() => {
@@ -18,10 +19,10 @@ export const RegistrationPage = ({title}) => {
         }
     }, [isAuth, navigation])
 
-    const handleRegistration = async (data) => {
+    const handleRegistration = async data => {
         await registration({
             email: data.email,
-            password: data.password
+            password: data.password,
         })
     }
 
@@ -31,12 +32,15 @@ export const RegistrationPage = ({title}) => {
 
     return (
         <>
-            <Header/>
+            <Header />
             <div className={cls.pageWrapper}>
                 <h1 className={cls.pageTitle}>{title}</h1>
                 <div className={cls.pageContent}>
                     <AppForm>
-                        <RegistrationForm formAction={handleRegistration} loginGoogle={loginGoogle} />
+                        <RegistrationForm
+                            formAction={handleRegistration}
+                            loginGoogle={loginGoogle}
+                        />
                     </AppForm>
                 </div>
             </div>

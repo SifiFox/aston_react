@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["movies-list.module.scss"],"names":[],"mappings":"AAAA;EACE;EACA;EACA;EACA;;AACA;EALF;IAMI;;;AAEF;EARF;IASI;;;AAEF;EAXF;IAYI","file":"movies-list.module.css"}
+{"version":3,"sourceRoot":"","sources":["movies-list.module.scss"],"names":[],"mappings":"AAAA;EACI;EACA;EACA;EACA;;AACA;EALJ;IAMQ;;;AAEJ;EARJ;IASQ;;;AAEJ;EAXJ;IAYQ","file":"movies-list.module.css"}

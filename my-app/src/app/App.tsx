@@ -1,14 +1,12 @@
-import {AppLayout} from "@/shared/ui/app-layout";
-import {Providers} from "@/shared/ui/providers";
-
+import { AppLayout } from "@/shared/ui/app-layout"
+import { Providers } from "@/shared/ui/providers"
 
 const App = () => {
     return (
         <Providers>
-            <AppLayout/>
+            <AppLayout />
         </Providers>
-    );
-};
+    )
+}
 
-export default App;
-
+export default App

@@ -1,1 +1,1 @@
-export {WidgetButtons} from './ui/widget-buttons'
+export { WidgetButtons } from "./ui/widget-buttons"

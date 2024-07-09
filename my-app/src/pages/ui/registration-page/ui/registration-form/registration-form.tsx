@@ -1,17 +1,13 @@
-import {Button, Form, Input} from "antd";
-import {GoogleOutlined, LockOutlined, UserOutlined} from "@ant-design/icons";
-import {Link} from "react-router-dom";
-import {RoutePath} from "@/shared/config/route-config/route-config";
+import { RoutePath } from "@/shared/config/route-config/route-config"
+import { GoogleOutlined, LockOutlined, UserOutlined } from "@ant-design/icons"
+import { Button, Form, Input } from "antd"
+import { Link } from "react-router-dom"
 
-
-
-
-export const RegistrationForm = ({formAction, loginGoogle}) => {
+export const RegistrationForm = ({ formAction, loginGoogle }) => {
     const [form] = Form.useForm()
-    const onFinish = (values) => {
+    const onFinish = values => {
         formAction(values)
-    };
-
+    }
 
     return (
         <Form
@@ -23,17 +19,30 @@ export const RegistrationForm = ({formAction, loginGoogle}) => {
         >
             <Form.Item
                 name="email"
-                rules={[{required: true, message: 'Пожалуйста, введите вашу почту!'}]}
+                rules={[
+                    {
+                        required: true,
+                        message: "Пожалуйста, введите вашу почту!",
+                    },
+                ]}
             >
-                <Input prefix={<UserOutlined className="site-form-item-icon"/>} placeholder="E-mail"/>
+                <Input
+                    prefix={<UserOutlined className="site-form-item-icon" />}
+                    placeholder="E-mail"
+                />
             </Form.Item>
 
             <Form.Item
                 name="password"
-                rules={[{required: true, message: 'Пожалуйста, введите ваш пароль!'}]}
+                rules={[
+                    {
+                        required: true,
+                        message: "Пожалуйста, введите ваш пароль!",
+                    },
+                ]}
             >
                 <Input
-                    prefix={<LockOutlined className="site-form-item-icon"/>}
+                    prefix={<LockOutlined className="site-form-item-icon" />}
                     type="password"
                     placeholder="Пароль"
                 />
@@ -41,42 +50,56 @@ export const RegistrationForm = ({formAction, loginGoogle}) => {
 
             <Form.Item
                 name="password2"
-                dependencies={['password']}
+                dependencies={["password"]}
                 rules={[
                     {
                         required: true,
                     },
-                    ({getFieldValue}) => ({
+                    ({ getFieldValue }) => ({
                         validator(_, value) {
-                            if (!value || getFieldValue('password') === value) {
-                                return Promise.resolve();
+                            if (!value || getFieldValue("password") === value) {
+                                return Promise.resolve()
                             }
-                            return Promise.reject(new Error('The new password that you entered do not match!'));
+                            return Promise.reject(
+                                new Error(
+                                    "The new password that you entered do not match!",
+                                ),
+                            )
                         },
                     }),
                 ]}
             >
                 <Input
-                    prefix={<LockOutlined className="site-form-item-icon"/>}
+                    prefix={<LockOutlined className="site-form-item-icon" />}
                     placeholder="Повторите пароль"
                 />
             </Form.Item>
 
             <Form.Item>
-                <Button type="default" htmlType="submit" block className="login-form-button">
+                <Button
+                    type="default"
+                    htmlType="submit"
+                    block
+                    className="login-form-button"
+                >
                     Регистрация
                 </Button>
                 или <Link to={RoutePath.login}>войти сейчас</Link>
             </Form.Item>
-            {
-                import.meta.env.VITE_API_TYPE === 'firebase' &&
+            {import.meta.env.VITE_API_TYPE === "firebase" && (
                 <Form.Item>
-                    <Button onClick={loginGoogle} type="default" htmlType="button" block className="login-form-button">
-                        <GoogleOutlined/>
+                    <Button
+                        onClick={loginGoogle}
+                        type="default"
+                        htmlType="button"
+                        block
+                        className="login-form-button"
+                    >
+                        <GoogleOutlined />
                         Войти через google
                     </Button>
                 </Form.Item>
-            }
+            )}
         </Form>
     )
 }

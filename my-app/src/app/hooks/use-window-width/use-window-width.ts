@@ -1,26 +1,23 @@
-import React from "react";
+import React from "react"
 
 export function useWindowWidth() {
-  const [windowWidth, setWindowWidth] = React.useState(0);
+    const [windowWidth, setWindowWidth] = React.useState(0)
 
-  React.useLayoutEffect(() => {
-    const handler = () => {
-      setWindowWidth(window.innerWidth);
-    };
+    React.useLayoutEffect(() => {
+        const handler = () => {
+            setWindowWidth(window.innerWidth)
+        }
 
-    handler();
-    window.addEventListener("resize", handler);
+        handler()
+        window.addEventListener("resize", handler)
 
-    return () => {
-      window.removeEventListener("resize", handler);
-    };
-  }, []);
+        return () => {
+            window.removeEventListener("resize", handler)
+        }
+    }, [])
 
-  return {
-    windowWidth,
-    isDesktop: windowWidth > 860
-  };
+    return {
+        windowWidth,
+        isDesktop: windowWidth > 860,
+    }
 }
-
-
-
