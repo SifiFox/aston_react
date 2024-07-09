@@ -6,7 +6,7 @@ import {useAuth} from "@/app/hooks/use-auth/use-auth";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {RoutePath} from "@/shared/config/route-config/route-config";
-import {registration} from "@/shared/api/api";
+import {loginWithGoogle, registration} from "@/shared/api/api";
 
 export const RegistrationPage = ({title}) => {
     const {isAuth} = useAuth()
@@ -25,6 +25,10 @@ export const RegistrationPage = ({title}) => {
         })
     }
 
+    const loginGoogle = () => {
+        loginWithGoogle()
+    }
+
     return (
         <>
             <Header/>
@@ -32,7 +36,7 @@ export const RegistrationPage = ({title}) => {
                 <h1 className={cls.pageTitle}>{title}</h1>
                 <div className={cls.pageContent}>
                     <AppForm>
-                        <RegistrationForm formAction={handleRegistration} />
+                        <RegistrationForm formAction={handleRegistration} loginGoogle={loginGoogle} />
                     </AppForm>
                 </div>
             </div>

@@ -1,12 +1,12 @@
 import {Button, Form, Input} from "antd";
-import {LockOutlined, UserOutlined} from "@ant-design/icons";
+import {GoogleOutlined, LockOutlined, UserOutlined} from "@ant-design/icons";
 import {Link} from "react-router-dom";
 import {RoutePath} from "@/shared/config/route-config/route-config";
 
 
 
 
-export const RegistrationForm = ({formAction}) => {
+export const RegistrationForm = ({formAction, loginGoogle}) => {
     const [form] = Form.useForm()
     const onFinish = (values) => {
         formAction(values)
@@ -68,6 +68,15 @@ export const RegistrationForm = ({formAction}) => {
                 </Button>
                 или <Link to={RoutePath.login}>войти сейчас</Link>
             </Form.Item>
+            {
+                import.meta.env.VITE_API_TYPE === 'firebase' &&
+                <Form.Item>
+                    <Button onClick={loginGoogle} type="default" htmlType="button" block className="login-form-button">
+                        <GoogleOutlined/>
+                        Войти через google
+                    </Button>
+                </Form.Item>
+            }
         </Form>
     )
 }

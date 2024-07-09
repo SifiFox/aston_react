@@ -1,14 +1,21 @@
 import {Button, Checkbox, Form, Input} from "antd";
-import {LockOutlined, UserOutlined} from "@ant-design/icons";
+import {GoogleOutlined, LockOutlined, UserOutlined} from "@ant-design/icons";
 import {Link} from "react-router-dom";
 import {RoutePath} from "@/shared/config/route-config/route-config";
 
 
+interface LoginFormProps {
+    formAction: (values) => void,
+    loginGoogle: () => void
+}
 
-export const LoginForm = ({formAction}) => {
+type LoginFormData = Record<string, string>
+
+
+export const LoginForm = ({formAction, loginGoogle}: LoginFormProps) => {
     const [form] = Form.useForm()
 
-    const onFinish = (values) => {
+    const onFinish = (values: LoginFormData) => {
         formAction(values)
     };
 
@@ -52,6 +59,16 @@ export const LoginForm = ({formAction}) => {
                 </Button>
                 или <Link to={RoutePath.registration}>зарегистрироваться</Link>
             </Form.Item>
+            {
+                import.meta.env.VITE_API_TYPE === 'firebase' &&
+                <Form.Item>
+                    <Button onClick={loginGoogle} type="default" htmlType="button" block className="login-form-button">
+                        <GoogleOutlined/>
+                        Войти через google
+                    </Button>
+                </Form.Item>
+            }
+
         </Form>
     )
 }

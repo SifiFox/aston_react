@@ -1,6 +1,12 @@
-import { signInWithEmailAndPassword} from "firebase/auth";
-import { onAuthStateChanged, signOut, createUserWithEmailAndPassword} from 'firebase/auth'
-import {auth} from "@/shared/config/firebase-config/firebase-config";
+import {
+    createUserWithEmailAndPassword,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    signOut
+} from "firebase/auth";
+
+import {auth, provider} from "@/shared/config/firebase-config/firebase-config";
 import {message} from "antd";
 
 
@@ -23,12 +29,19 @@ export const login = async ({email, password}) => {
         })
 }
 
+
+export const loginWithGoogle = async () => {
+    return signInWithPopup(auth, provider)
+}
+
+
 export const registration = async ({email, password}) => {
     createUserWithEmailAndPassword(auth, email, password).then(res => {
         console.log(res)
     })
     return true
 }
+
 
 export const logout = () => signOut(auth)
 

@@ -32,6 +32,21 @@ export const login = ({email, password}) => {
 }
 
 
+export const loginWithGoogle = () => {
+    switch (import.meta.env.VITE_API_TYPE) {
+        case 'firebase': {
+            return firebaseApi.loginWithGoogle()
+        }
+        case 'ls': {
+            return 'Not supported feature'
+        }
+        default: {
+            throw new Error('API не подключено')
+        }
+    }
+}
+
+
 export const registration = ({email, password}) => {
     switch (import.meta.env.VITE_API_TYPE) {
         case 'firebase': {

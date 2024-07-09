@@ -6,7 +6,7 @@ import {useAppDispatch} from "@/shared/redux/hooks";
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "@/app/hooks/use-auth/use-auth";
 import {useEffect} from "react";
-import {login} from "@/shared/api/api";
+import {login, loginWithGoogle} from "@/shared/api/api";
 import {setUser} from "@/shared/redux/store/slices/user-slice";
 import {RoutePath} from "@/shared/config/route-config/route-config";
 
@@ -34,6 +34,11 @@ export const LoginPage = ({title}) => {
                 navigation(RoutePath.login)
             })
     }
+
+    const loginGoogle = () => {
+        loginWithGoogle()
+    }
+
     return (
         <>
             <Header/>
@@ -41,7 +46,7 @@ export const LoginPage = ({title}) => {
                 <h1 className={cls.pageTitle}>{title}</h1>
                 <div className={cls.pageContent}>
                     <AppForm>
-                        <LoginForm formAction={handleLogin}/>
+                        <LoginForm formAction={handleLogin} loginGoogle={loginGoogle}/>
                     </AppForm>
                 </div>
             </div>
