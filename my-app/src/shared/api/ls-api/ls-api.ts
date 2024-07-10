@@ -23,7 +23,7 @@ export const login = async ({ email, password }) => {
     }
 }
 
-export const registration = async ({email, password}) => {
+export const registration = async ({ email, password }) => {
     const users = JSON.parse(localStorage.getItem("users"))
     users?.sort((a, b) => a.uid - b.uid)
     const lastId = users ? users[users.length - 1].uid : 0

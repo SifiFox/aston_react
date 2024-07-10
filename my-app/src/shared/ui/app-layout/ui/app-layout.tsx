@@ -10,7 +10,6 @@ import { message } from "antd"
 import { Content } from "antd/es/layout/layout"
 import classNames from "classnames"
 
-
 export const AppLayout = () => {
     const { theme } = useTheme()
     const dispatch = useAppDispatch()

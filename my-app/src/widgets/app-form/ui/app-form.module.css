@@ -1,18 +1,18 @@
 .form {
-  min-width: 400px;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  justify-content: center;
-  padding: 60px 30px;
-  border-radius: 20px;
-  background: #fff;
+    min-width: 400px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    padding: 60px 30px;
+    border-radius: 20px;
+    background: #fff;
 }
 @media screen and (max-width: 450px) {
-  .form {
-    min-width: 90%;
-  }
+    .form {
+        min-width: 90%;
+    }
 }
 
 /*# sourceMappingURL=app-form.module.css.map */

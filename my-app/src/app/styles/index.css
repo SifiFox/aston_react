@@ -4,8 +4,8 @@
 @import url(./themes/light.scss);
 @import url(./themes/dark.scss);
 .app {
-  padding-bottom: var(--xl);
-  background: var(--bg-color);
+    padding-bottom: var(--xl);
+    background: var(--bg-color);
 }
 
 /*# sourceMappingURL=index.css.map */

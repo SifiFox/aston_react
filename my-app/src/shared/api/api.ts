@@ -3,7 +3,6 @@ import { type Strings } from "@pages/ui/login-page/ui/login-form/login-form"
 import * as firebaseApi from "./firebase-api/firebase-api"
 import * as lsApi from "./ls-api/ls-api"
 
-
 export const checkAuth = callback => {
     switch (import.meta.env.VITE_API_TYPE) {
         case "firebase": {
