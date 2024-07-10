@@ -1,13 +1,16 @@
+import { type Strings } from "@pages/ui/login-page/ui/login-form/login-form"
+
 import * as firebaseApi from "./firebase-api/firebase-api"
 import * as lsApi from "./ls-api/ls-api"
+
 
 export const checkAuth = callback => {
     switch (import.meta.env.VITE_API_TYPE) {
         case "firebase": {
-            return firebaseApi.checkAuth(callback)
+            return callback ? firebaseApi.checkAuth(callback) : null
         }
         case "ls": {
-            return "check auth ls"
+            return lsApi.checkAuth()
         }
         default: {
             throw new Error("API не подключено")
@@ -21,8 +24,7 @@ export const login = ({ email, password }) => {
             return firebaseApi.login({ email, password })
         }
         case "ls": {
-            lsApi.login()
-            break
+            return lsApi.login({ email, password })
         }
         default: {
             throw new Error("API не подключено")
@@ -44,14 +46,14 @@ export const loginWithGoogle = () => {
     }
 }
 
-export const registration = ({ email, password }) => {
+export const registration = (data: Strings) => {
+    const { email, password } = data
     switch (import.meta.env.VITE_API_TYPE) {
         case "firebase": {
             return firebaseApi.registration({ email, password })
         }
         case "ls": {
-            lsApi.login()
-            break
+            return lsApi.registration({ email, password })
         }
         default: {
             throw new Error("API не подключено")
@@ -65,7 +67,7 @@ export const logOut = () => {
             return firebaseApi.logout()
         }
         case "ls": {
-            return "ls logout"
+            return lsApi.logout()
         }
         default: {
             throw new Error("API не подключено")

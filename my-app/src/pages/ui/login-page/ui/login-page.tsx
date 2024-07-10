@@ -8,7 +8,7 @@ import { Header } from "@/widgets/header"
 import { type PageProps } from "@pages/types/types"
 import {
     LoginForm,
-    type LoginFormData,
+    type Strings,
 } from "@pages/ui/login-page/ui/login-form/login-form"
 import cls from "@pages/ui/page.module.scss"
 import { useEffect } from "react"
@@ -25,7 +25,7 @@ export const LoginPage = ({ title }: PageProps) => {
         }
     }, [isAuth, navigation])
 
-    const handleLogin = async (data: LoginFormData) => {
+    const handleLogin = async (data: Strings) => {
         const { email, password } = data
         await login({ email, password }).then(res => {
             const { email, uid, accessToken } = res

@@ -8,6 +8,8 @@ import cls from "@pages/ui/page.module.scss"
 import { RegistrationForm } from "@pages/ui/registration-page/ui/registration-form/registration-form"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import {message} from "antd";
+
 
 export const RegistrationPage = ({ title }: PageProps) => {
     const { isAuth } = useAuth()
@@ -20,10 +22,14 @@ export const RegistrationPage = ({ title }: PageProps) => {
     }, [isAuth, navigation])
 
     const handleRegistration = async data => {
-        await registration({
-            email: data.email,
-            password: data.password,
-        })
+        try {
+            await registration({
+                email: data.email,
+                password: data.password,
+            })
+        } catch (err) {
+            message.error(err.message)
+        }
     }
 
     const loginGoogle = () => {

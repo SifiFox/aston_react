@@ -8,12 +8,12 @@ interface LoginFormProps {
     loginGoogle: () => void
 }
 
-export type LoginFormData = Record<string, string>
+export type Strings = Record<string, string>
 
 export const LoginForm = ({ formAction, loginGoogle }: LoginFormProps) => {
     const [form] = Form.useForm()
 
-    const onFinish = (values: LoginFormData) => {
+    const onFinish = (values: Strings) => {
         formAction(values)
     }
 

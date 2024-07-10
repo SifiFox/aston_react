@@ -33,7 +33,7 @@ export const loginWithGoogle = async () => {
 
 export const registration = async ({ email, password }) => {
     createUserWithEmailAndPassword(auth, email, password).then(res => {
-        console.log(res)
+        return res.user
     })
     return true
 }

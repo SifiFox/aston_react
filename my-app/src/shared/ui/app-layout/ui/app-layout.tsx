@@ -10,6 +10,7 @@ import { message } from "antd"
 import { Content } from "antd/es/layout/layout"
 import classNames from "classnames"
 
+
 export const AppLayout = () => {
     const { theme } = useTheme()
     const dispatch = useAppDispatch()
@@ -30,6 +31,19 @@ export const AppLayout = () => {
                     )
                 }
             })
+            break
+        }
+        case "ls": {
+            const authData = checkAuth(() => {})
+            if (authData) {
+                dispatch(
+                    setUser({
+                        email: authData.email,
+                        id: authData.uid,
+                        token: authData.accessToken,
+                    }),
+                )
+            }
             break
         }
         default: {
