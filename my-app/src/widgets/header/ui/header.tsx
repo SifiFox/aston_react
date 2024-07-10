@@ -1,4 +1,4 @@
-import { useAuth } from "@/app/hooks/use-auth/use-auth"
+// import { useAuth } from "@/app/hooks/use-auth/use-auth"
 import { useTheme } from "@/app/hooks/use-theme/use-theme"
 import { Logo } from "@/shared/ui/logo"
 import { NavActions } from "@/widgets/header/ui/nav-actions"
@@ -10,7 +10,7 @@ import cls from "./header.module.scss"
 
 export const Header = () => {
     const { theme } = useTheme()
-    const { isAuth } = useAuth()
+    // const { isAuth } = useAuth()
 
     return (
         <header className={classNames(cls.header, theme)}>

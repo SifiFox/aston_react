@@ -16,16 +16,16 @@ export enum AppRoutes {
     MOVIE = "movie",
     FAVOURITES = "favourites",
     NOT_FOUND = "not_found",
-    LOGIN = "login",
-    REGISTRATION = "registration",
+    // LOGIN = "login",
+    // REGISTRATION = "registration",
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.HOME]: "/",
     [AppRoutes.MOVIE]: "/",
     [AppRoutes.FAVOURITES]: "/favourites",
-    [AppRoutes.LOGIN]: "/login",
-    [AppRoutes.REGISTRATION]: "/registration",
+    // [AppRoutes.LOGIN]: "/login",
+    // [AppRoutes.REGISTRATION]: "/registration",
     [AppRoutes.NOT_FOUND]: "*",
 }
 
@@ -40,16 +40,16 @@ export const RouteConfig: Record<AppRoutes, AppRoutesProps> = {
         title: "Фильм",
         element: <MoviePageAsync title="Фильм" />,
     },
-    [AppRoutes.LOGIN]: {
-        path: RoutePath.login,
-        title: "Login",
-        element: <LoginPage title="Логин" />,
-    },
-    [AppRoutes.REGISTRATION]: {
-        path: RoutePath.registration,
-        title: "Создать аккаунт",
-        element: <RegistrationPage title="Создать аккаунт" />,
-    },
+    // [AppRoutes.LOGIN]: {
+    //     path: RoutePath.login,
+    //     title: "Login",
+    //     element: <LoginPage title="Логин" />,
+    // },
+    // [AppRoutes.REGISTRATION]: {
+    //     path: RoutePath.registration,
+    //     title: "Создать аккаунт",
+    //     element: <RegistrationPage title="Создать аккаунт" />,
+    // },
     [AppRoutes.FAVOURITES]: {
         path: RoutePath.favourites,
         title: "Избранные",
