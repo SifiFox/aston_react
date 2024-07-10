@@ -15,8 +15,8 @@ export const Header = () => {
     return (
         <header className={classNames(cls.header, theme)}>
             <Logo />
-            <Navbar />
-            {isAuth ? <NavActionsAuthorized /> : <NavActions />}
+            {/*<Navbar />*/}
+            {/*{isAuth ? <NavActionsAuthorized /> : <NavActions />}*/}
         </header>
     )
 }
