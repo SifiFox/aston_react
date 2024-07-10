@@ -1,1 +1,0 @@
-import{V as e,X as a,Y as s}from"./index-gQ0JSUNH.js";const t=()=>e.jsxs(e.Fragment,{children:[e.jsx(a,{}),e.jsxs("div",{className:s.pageWrapper,children:[e.jsx("h1",{className:s.pageTitle,children:"Test"}),e.jsx("div",{className:s.pageContent,children:e.jsx("span",{children:"Test Page"})})]})]});export{t as default};
