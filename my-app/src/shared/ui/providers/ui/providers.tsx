@@ -1,7 +1,8 @@
 import { ThemeProvider } from "@/app/providers/theme/ui/theme-provider"
-// import { store } from "@/shared/redux/store/store"
+import { store } from "@/shared/redux/store/store"
 import { ConfigProvider } from "antd"
-// import { Provider } from "react-redux"
+import { Provider } from "react-redux"
+
 
 export const Providers = ({ children }) => {
     return (
@@ -14,8 +15,7 @@ export const Providers = ({ children }) => {
             }}
         >
             <ThemeProvider>
-                {children}
-                {/*<Provider store={store}>{children}</Provider>*/}
+                <Provider store={store}>{children}</Provider>
             </ThemeProvider>
         </ConfigProvider>
     )

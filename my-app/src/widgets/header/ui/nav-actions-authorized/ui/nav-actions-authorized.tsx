@@ -9,16 +9,16 @@ import { Button } from "antd"
 export const NavActionsAuthorized = () => {
     const { isDesktop } = useWindowWidth()
     const dispatch = useAppDispatch()
-    // const handleClickLogout = () => {
-    //     dispatch(removeUser())
-    //     logOut()
-    // }
+    const handleClickLogout = () => {
+        dispatch(removeUser())
+        logOut()
+    }
 
     return (
         <div className={cls.navActions}>
-            {/*<Button onClick={handleClickLogout} icon={<UserDeleteOutlined />}>*/}
-            {/*    {isDesktop && "выйти"}*/}
-            {/*</Button>*/}
+            <Button onClick={handleClickLogout} icon={<UserDeleteOutlined />}>
+                {isDesktop && "выйти"}
+            </Button>
         </div>
     )
 }

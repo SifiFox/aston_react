@@ -12,43 +12,43 @@ import classNames from "classnames"
 
 export const AppLayout = () => {
     const { theme } = useTheme()
-    // const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch()
 
-    // switch (import.meta.env.VITE_API_TYPE) {
-    //     case "firebase": {
-    //         checkAuth(user => {
-    //             if (user) {
-    //                 const { accessToken, auth } = user
-    //                 const { currentUser } = auth
-    //                 const { email, uid } = currentUser
-    //                 dispatch(
-    //                     setUser({
-    //                         email,
-    //                         id: uid,
-    //                         token: accessToken,
-    //                     }),
-    //                 )
-    //             }
-    //         })
-    //         break
-    //     }
-    //     case "ls": {
-    //         const authData = checkAuth(() => {})
-    //         if (authData) {
-    //             dispatch(
-    //                 setUser({
-    //                     email: authData.email,
-    //                     id: authData.uid,
-    //                     token: authData.accessToken,
-    //                 }),
-    //             )
-    //         }
-    //         break
-    //     }
-    //     default: {
-    //         message.error("Api not connected")
-    //     }
-    // }
+    switch (import.meta.env.VITE_API_TYPE) {
+        case "firebase": {
+            checkAuth(user => {
+                if (user) {
+                    const { accessToken, auth } = user
+                    const { currentUser } = auth
+                    const { email, uid } = currentUser
+                    dispatch(
+                        setUser({
+                            email,
+                            id: uid,
+                            token: accessToken,
+                        }),
+                    )
+                }
+            })
+            break
+        }
+        case "ls": {
+            const authData = checkAuth(() => {})
+            if (authData) {
+                dispatch(
+                    setUser({
+                        email: authData.email,
+                        id: authData.uid,
+                        token: authData.accessToken,
+                    }),
+                )
+            }
+            break
+        }
+        default: {
+            message.error("Api not connected")
+        }
+    }
 
     return (
         <div className={classNames(cls.layout, `app ${theme}`)}>
