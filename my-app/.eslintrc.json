@@ -11,22 +11,14 @@
         "project": true,
         "tsconfigRootDir": "./"
     },
-    "plugins": [
-        "@typescript-eslint",
-        "react"
-    ],
+    "plugins": ["@typescript-eslint", "react"],
     "root": true,
-    "ignorePatterns": [
-        "dist"
-    ],
+    "ignorePatterns": ["dist"],
     "rules": {
         "no-unused-expressions": "error",
         "react/jsx-no-useless-fragment": "error",
         "import/prefer-default-export": "off",
-        "curly": [
-            "error",
-            "all"
-        ],
+        "curly": ["error", "all"],
         "no-console": "off",
         "no-restricted-syntax": [
             "error",
@@ -40,35 +32,14 @@
             {
                 "fixStyle": "separate-type-imports"
             }
-        ],
-        "@typescript-eslint/no-restricted-imports": [
-            2,
-            {
-                "paths": [
-                    {
-                        "name": "react-redux",
-                        "importNames": [
-                            "useSelector",
-                            "useStore",
-                            "useDispatch"
-                        ],
-                        "message": "Please use pre-typed versions from `src/app/hooks.ts` instead."
-                    }
-                ]
-            }
         ]
     },
     "overrides": [
         {
-            "files": [
-                "*.{c,m,}{t,j}s",
-                "*.{t,j}sx"
-            ]
+            "files": ["*.{c,m,}{t,j}s", "*.{t,j}sx"]
         },
         {
-            "files": [
-                "*{test,spec}.{t,j}s?(x)"
-            ],
+            "files": ["*{test,spec}.{t,j}s?(x)"],
             "env": {
                 "jest": true
             }

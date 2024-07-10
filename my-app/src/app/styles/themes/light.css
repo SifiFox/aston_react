@@ -1,10 +1,10 @@
 :root {
-  --bg-color: #faf4fb;
-  --inverted-bg-color: #bd5012;
-  --primary-color: #9a1a0e;
-  --secondary-color: #04ff04;
-  --inverted-primary-color: #dbd5dc;
-  --inverted-secondary-color: #faf4fb;
+    --bg-color: #faf4fb;
+    --inverted-bg-color: #bd5012;
+    --primary-color: #9a1a0e;
+    --secondary-color: #04ff04;
+    --inverted-primary-color: #dbd5dc;
+    --inverted-secondary-color: #faf4fb;
 }
 
 /*# sourceMappingURL=light.css.map */

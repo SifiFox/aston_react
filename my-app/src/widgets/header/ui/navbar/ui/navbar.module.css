@@ -1,33 +1,33 @@
 .navbar {
-  display: flex;
-  gap: 40px;
-  font-size: 42px;
+    display: flex;
+    gap: 40px;
+    font-size: 42px;
 }
 @media screen and (max-width: 680px) {
-  .navbar {
-    font-size: 14px;
-    gap: 10px;
-  }
+    .navbar {
+        font-size: 14px;
+        gap: 10px;
+    }
 }
 
 nav {
-  width: 100%;
+    width: 100%;
 }
 
 .navLink {
-  color: var(--inverted-bg-color);
-  font-weight: 600;
+    color: var(--inverted-bg-color);
+    font-weight: 600;
 }
 .navLink:hover {
-  color: var(--inverted-secondary-color);
+    color: var(--inverted-secondary-color);
 }
 
 .activeLink {
-  color: var(--primary-color);
-  border-bottom: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
 }
 .activeLink:hover {
-  color: var(--secondary-color);
+    color: var(--secondary-color);
 }
 
 /*# sourceMappingURL=navbar.module.css.map */

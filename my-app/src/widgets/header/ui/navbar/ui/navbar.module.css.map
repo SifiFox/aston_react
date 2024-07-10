@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["navbar.module.scss"],"names":[],"mappings":"AAAA;EACE;EACA;EACA;;AAEA;EALF;IAMI;IACA;;;;AAKJ;EACE;;;AAGF;EACE;EACA;;AACA;EACE;;;AAMJ;EACE;EACA;;AACA;EACE","file":"navbar.module.css"}
+{"version":3,"sourceRoot":"","sources":["navbar.module.scss"],"names":[],"mappings":"AAAA;EACI;EACA;EACA;;AAEA;EALJ;IAMQ;IACA;;;;AAIR;EACI;;;AAGJ;EACI;EACA;;AACA;EACI;;;AAIR;EACI;EACA;;AACA;EACI","file":"navbar.module.css"}

@@ -1,1 +1,1 @@
-export { MoviePageAsync } from './ui/movie-page.async'
+export { MoviePageAsync } from "./ui/movie-page.async"
