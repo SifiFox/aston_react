@@ -1,12 +1,21 @@
-import { useMovies } from "@/app/hooks/use-movies/use-movies"
 import cls from "@/pages/ui/page.module.scss"
+import { useFetchAllMoviesQuery } from "@/shared/redux/store/services/movie-service"
 import { Header } from "@/widgets/header"
-import { MoviesList } from "@/widgets/movies-list"
 import { type PageProps } from "@pages/types/types"
-import { memo } from "react"
+import {memo} from "react"
+import {MoviesContent} from "@/widgets/movies-content";
+import {ErrorBoundary} from "react-error-boundary";
+import {ErrorFallback} from "@/shared/ui/error-fallback";
+
 
 const MainPage = ({ title }: PageProps) => {
-    const { items, total } = useMovies({})
+    const { movies, moviesCount, isError } = useFetchAllMoviesQuery(undefined, {
+        selectFromResult: ({ data, isError }) => ({
+            movies: data?.movies,
+            moviesCount: data?.moviesCount,
+            isError: isError
+        }),
+    })
 
     return (
         <>
@@ -14,11 +23,11 @@ const MainPage = ({ title }: PageProps) => {
             <div className={cls.pageWrapper}>
                 <h1 className={cls.pageTitle}>{title}</h1>
                 <div className={cls.pageContent}>
-                    <div className={cls.totalMovies}>
-                        <h3>Всего: </h3>
-                        <p>{total}</p>
-                    </div>
-                    {items?.length > 0 && <MoviesList movies={items} />}
+                    <ErrorBoundary
+                        FallbackComponent={ErrorFallback}
+                    >
+                        <MoviesContent movies={movies} moviesCount={moviesCount} isError={isError}/>
+                    </ErrorBoundary>
                 </div>
             </div>
         </>

@@ -1,3 +1,5 @@
+import { MovieBase } from "@/app/hooks/use-movies/types"
+
 export const checkAuth = () => {
     const activeUser = JSON.parse(localStorage.getItem("activeUser"))
     return activeUser ?? null
@@ -50,4 +52,91 @@ export const registration = async ({ email, password }) => {
 
 export const logout = () => {
     localStorage.getItem("activeUser") && localStorage.removeItem("activeUser")
+}
+
+export const getFavouritesByUser = userId => {
+    const favourites = localStorage.getItem("favourites")
+    if (favourites) {
+        return JSON.parse(favourites).find(item => item.userId === userId)
+    } else {
+        return []
+    }
+}
+
+export const setFavourites = (movie: MovieBase) => {
+    const activeUser = JSON.parse(localStorage.getItem("activeUser"))
+    const activeUserFavourites = getFavouritesByUser(activeUser.uid)
+    const allFavourites = localStorage.getItem("favourites")
+
+    if (!allFavourites) {
+        localStorage.setItem(
+            "favourites",
+            JSON.stringify([
+                {
+                    userId: activeUser.uid,
+                    movies: [movie],
+                },
+            ]),
+        )
+    }
+    if (allFavourites && !activeUserFavourites) {
+        localStorage.setItem(
+            "favourites",
+            JSON.stringify([
+                ...JSON.parse(allFavourites),
+                {
+                    userId: activeUser.uid,
+                    movies: [movie],
+                },
+            ]),
+        )
+    }
+
+    if (activeUserFavourites) {
+        const isMovieFavourite = !!activeUserFavourites.movies.find(
+            searchedMovie => searchedMovie.kinopoiskId === movie.kinopoiskId,
+        )
+        if (isMovieFavourite) {
+            const filteredMovies = activeUserFavourites.movies.filter(
+                searchedMovie =>
+                    searchedMovie.kinopoiskId !== movie.kinopoiskId,
+            )
+
+            localStorage.setItem(
+                "favourites",
+                JSON.stringify([
+                    ...JSON.parse(allFavourites).filter(
+                        item => item.userId !== activeUser.uid,
+                    ),
+                    {
+                        userId: activeUser.uid,
+                        movies: filteredMovies,
+                    },
+                ]),
+            )
+        } else {
+            const updatedUserMovies = [...activeUserFavourites.movies, movie]
+            const updatedUserFavouritesData = {
+                ...activeUserFavourites,
+                movies: [...updatedUserMovies],
+            }
+
+            console.log(updatedUserFavouritesData)
+            localStorage.setItem(
+                "favourites",
+                JSON.stringify([
+                    ...JSON.parse(allFavourites).filter(
+                        item => item.userId !== activeUser.uid,
+                    ),
+                    updatedUserFavouritesData,
+                ]),
+            )
+        }
+    }
+}
+
+export const isFavourite = (movie: MovieBase) => {
+    const activeUser = JSON.parse(localStorage.getItem("activeUser"))
+    const activeUserFavourites = getFavouritesByUser(activeUser.uid)
+    return !!activeUserFavourites.movies.find(item => item.kinopoiskId === movie.kinopoiskId)
 }

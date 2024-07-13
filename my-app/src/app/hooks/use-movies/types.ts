@@ -77,7 +77,7 @@ export interface MovieBase {
 }
 
 export interface MoviesBase {
-    total?: number
-    totalPages?: number
-    items?: MovieBase[]
+    total: number
+    totalPages: number
+    items: MovieBase[]
 }

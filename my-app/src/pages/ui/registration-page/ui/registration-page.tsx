@@ -10,6 +10,7 @@ import { message } from "antd"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
+
 export const RegistrationPage = ({ title }: PageProps) => {
     const { isAuth } = useAuth()
     const navigation = useNavigate()

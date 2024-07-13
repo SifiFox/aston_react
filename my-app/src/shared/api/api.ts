@@ -2,6 +2,7 @@ import { type Strings } from "@pages/ui/login-page/ui/login-form/login-form"
 
 import * as firebaseApi from "./firebase-api/firebase-api"
 import * as lsApi from "./ls-api/ls-api"
+import {MovieBase} from "@/app/hooks/use-movies/types";
 
 export const checkAuth = callback => {
     switch (import.meta.env.VITE_API_TYPE) {
@@ -67,6 +68,49 @@ export const logOut = () => {
         }
         case "ls": {
             return lsApi.logout()
+        }
+        default: {
+            throw new Error("API не подключено")
+        }
+    }
+}
+
+
+export const setFavourites = (movie: MovieBase) => {
+    switch (import.meta.env.VITE_API_TYPE) {
+        case "firebase": {
+            return 'fb setFav'
+        }
+        case "ls": {
+            return lsApi.setFavourites(movie)
+        }
+        default: {
+            throw new Error("API не подключено")
+        }
+    }
+}
+
+export const getFavouritesByUser = (id) => {
+    switch (import.meta.env.VITE_API_TYPE) {
+        case "firebase": {
+            return 'fb getFav'
+        }
+        case "ls": {
+            return lsApi.getFavouritesByUser(id)
+        }
+        default: {
+            throw new Error("API не подключено")
+        }
+    }
+}
+
+export const isFavourite = (movie: MovieBase) => {
+    switch (import.meta.env.VITE_API_TYPE) {
+        case "firebase": {
+            return 'fb setFav'
+        }
+        case "ls": {
+            return lsApi.isFavourite(movie)
         }
         default: {
             throw new Error("API не подключено")
