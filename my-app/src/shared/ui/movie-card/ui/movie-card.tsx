@@ -1,16 +1,17 @@
-import { useAuth } from "@/app/hooks/use-auth/use-auth"
 import { type MovieBase } from "@/app/hooks/use-movies/types"
-import { isFavourite, setFavourites } from "@/shared/api/api"
+import { setFavourites } from "@/shared/api/api"
 import { RoutePath } from "@/shared/config/route-config/route-config"
+import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks"
+import { makeGetIsMovieFavourite } from "@/shared/redux/store/selectors/favourites-selector"
+import {
+    addMovie,
+    removeMovie,
+} from "@/shared/redux/store/slices/favourites-slice"
 import { StarFilled, StarOutlined } from "@ant-design/icons"
 import { Card, message } from "antd"
-import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
 import cls from "./movie-card.module.scss"
-import {useAppDispatch} from "@/shared/redux/hooks";
-import {setFavouritesStore} from "@/shared/redux/store/slices/favourites-slice";
-// import {getFavouritesByUser} from "@/shared/api/ls-api/ls-api";
 
 
 const { Meta } = Card
@@ -18,21 +19,26 @@ const { Meta } = Card
 export const MovieCard = (props: { movie: MovieBase }) => {
     const { movie } = props
     const navigation = useNavigate()
-    const [isMovieFavourite, setIsMovieFavourite] = useState(
-        // isAuth ? isFavourite(movie) : false,
+    const dispatch = useAppDispatch()
+
+    const { isAuth } = useAppSelector(state => state.user)
+    const isFavourite = useAppSelector(state =>
+        makeGetIsMovieFavourite()(state.favourites, movie.kinopoiskId),
     )
 
     const handleClickFavourite = () => {
-        // if (isAuth) {
-        //     message.error(
-        //         "Действие доступно только авторизованным пользователям",
-        //     )
-        //     navigation(RoutePath.login)
-        // } else {
-        //     setFavourites(movie)
-        //     setIsMovieFavourite(isFavourite(movie))
-        //     // dispatch(setFavouritesStore(getFavouritesByUser(id)))
-        // }
+        if (!isAuth) {
+            message.error(
+                "Действие доступно только авторизованным пользователям",
+            )
+            navigation(RoutePath.login)
+        }
+        setFavourites(movie)
+        if (isFavourite) {
+            dispatch(removeMovie(movie))
+        } else {
+            dispatch(addMovie(movie))
+        }
     }
 
     return (
@@ -41,7 +47,7 @@ export const MovieCard = (props: { movie: MovieBase }) => {
             hoverable
             cover={<img alt="example" src={movie.posterUrl} />}
             actions={[
-                isMovieFavourite ? (
+                isFavourite ? (
                     <StarFilled onClick={handleClickFavourite} />
                 ) : (
                     <StarOutlined onClick={handleClickFavourite} />

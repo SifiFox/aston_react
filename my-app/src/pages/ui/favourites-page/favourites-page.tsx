@@ -1,21 +1,17 @@
+import { useFavourites } from "@/features/favourites/hooks/use-favourites"
 import cls from "@/pages/ui/page.module.scss"
-import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks"
+import { useAppSelector } from "@/shared/redux/hooks"
 import { useFetchAllMoviesQuery } from "@/shared/redux/store/services/movie-service"
-import { setFavouritesStore} from "@/shared/redux/store/slices/favourites-slice"
 import { ErrorFallback } from "@/shared/ui/error-fallback"
 import { Header } from "@/widgets/header"
 import { MoviesContent } from "@/widgets/movies-content"
 import { type PageProps } from "@pages/types/types"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
-import {getFavouritesByUser} from "@/shared/api/api";
 
 
 const FavouritesPage = ({ title }: PageProps) => {
-    const dispatch = useAppDispatch()
     const { movies: userFavourites } = useAppSelector(state => state.favourites)
-    const { id } = useAppSelector(state => state.user)
-
     const { movies, isError } = useFetchAllMoviesQuery(undefined, {
         selectFromResult: ({ data, isError }) => ({
             movies: data?.movies,
@@ -23,33 +19,41 @@ const FavouritesPage = ({ title }: PageProps) => {
             isError: isError,
         }),
     })
-
+    useFavourites()
+    const [favouriteMoviesData, setFavouriteMoviesData] = useState()
 
     useEffect(() => {
-        if (movies) {
-            getFavouritesByUser(id).then(res => {
-                dispatch(setFavouritesStore(res.movies))
-            })
+        if (userFavourites && movies) {
+            setFavouriteMoviesData(
+                movies.filter(movie =>
+                    userFavourites.some(
+                        favourite =>
+                            String(favourite.kinopoiskId) === String(movie.kinopoiskId),
+                    ),
+                ),
+            )
         }
-    }, [movies])
+    }, [movies, userFavourites])
 
-    return (
-        <>
-            <Header />
-            <div className={cls.pageWrapper}>
-                <h1 className={cls.pageTitle}>{title}</h1>
-                <div className={cls.pageContent}>
-                    <ErrorBoundary FallbackComponent={ErrorFallback}>
-                        <MoviesContent
-                            movies={userFavourites?.movies}
-                            moviesCount={userFavourites?.movies?.length}
-                            isError={isError}
-                        />
-                    </ErrorBoundary>
+    if (userFavourites) {
+        return (
+            <>
+                <Header />
+                <div className={cls.pageWrapper}>
+                    <h1 className={cls.pageTitle}>{title}</h1>
+                    <div className={cls.pageContent}>
+                        <ErrorBoundary FallbackComponent={ErrorFallback}>
+                            <MoviesContent
+                                movies={favouriteMoviesData}
+                                moviesCount={userFavourites.length}
+                                isError={isError}
+                            />
+                        </ErrorBoundary>
+                    </div>
                 </div>
-            </div>
-        </>
-    )
+            </>
+        )
+    }
 }
 
 export default FavouritesPage

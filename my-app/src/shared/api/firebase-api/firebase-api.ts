@@ -12,14 +12,7 @@ import {
     signInWithPopup,
     signOut,
 } from "firebase/auth"
-import {
-    collection,
-    onSnapshot,
-    doc,
-    getDoc,
-    setDoc,
-    updateDoc
-} from "firebase/firestore"
+import { collection, doc, getDocs, updateDoc } from "firebase/firestore"
 
 export const checkAuth = (callback: (data) => void) => {
     onAuthStateChanged(auth, user => {
@@ -54,29 +47,42 @@ export const registration = async ({ email, password }) => {
 
 export const logout = () => signOut(auth)
 
-export const getFavouritesByUser = async (userId) => {
-    const userRef = doc(firestore, 'usersData', userId)
-    const docSnap = await getDoc(userRef);
-    const movies = docSnap.data().favourites.map(item => {return {kinopoiskId: item}})
-    return {
-        userId,
-        movies
-    }
+export const getFavouritesByUser = async userId => {
+    const querySnapshot = await getDocs(collection(firestore, "usersData"))
+    const data = []
+    querySnapshot.forEach(doc => {
+        data.push(doc.data())
+    })
+    const filteredData = data.find(item => item.userId === userId)
+
+    return filteredData
+        ? {
+              userId: filteredData.userId,
+              movies: filteredData.favourites.map(item => {
+                  return {
+                      kinopoiskId: item,
+                  }
+              }),
+          }
+        : null
 }
 
 export const setFavourites = async (movie: MovieBase) => {
-    console.log('fb setFav')
-    return true
-}
-
-export const isFavourite = (movie: MovieBase) => {
-    checkAuth(async (user) => {
-        if (user) {
-            const { accessToken, auth } = user
-            const { currentUser } = auth
-            const { email, uid } = currentUser
-            // await getFavouritesByUser(uid)
-        }
+    const querySnapshot = await getDocs(collection(firestore, "usersData"))
+    const data = []
+    querySnapshot.forEach(doc => {
+        data.push(doc.data())
     })
-    // return true
+    const { kinopoiskId } = movie
+    const userData = data.find(
+        item => String(item.userId) === String(auth.currentUser.uid),
+    )
+    const isMovieFavourite = userData.favourites.includes(String(kinopoiskId))
+    if (isMovieFavourite) {
+        userData.favourites.splice(userData.favourites.indexOf(String(kinopoiskId)), 1)
+    } else {
+        userData.favourites.push(String(kinopoiskId))
+    }
+    const docRef = doc(firestore, "usersData", auth.currentUser.uid)
+    await updateDoc(docRef, userData)
 }

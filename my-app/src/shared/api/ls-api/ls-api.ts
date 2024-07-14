@@ -1,6 +1,6 @@
 import { MovieBase } from "@/app/hooks/use-movies/types"
 
-export const checkAuth = (callback) => {
+export const checkAuth = callback => {
     const activeUser = JSON.parse(localStorage.getItem("activeUser"))
     callback(activeUser)
     return null ?? activeUser
@@ -48,7 +48,6 @@ export const registration = async ({ email, password }) => {
     } else {
         localStorage.setItem("users", JSON.stringify(newUser))
     }
-    checkAuth()
 }
 
 export const logout = () => {
@@ -64,9 +63,9 @@ export const getFavouritesByUser = async userId => {
     }
 }
 
-export const setFavourites =  async (movie: MovieBase) => {
+export const setFavourites = async (movie: MovieBase) => {
     const activeUser = JSON.parse(localStorage.getItem("activeUser"))
-    const activeUserFavourites = getFavouritesByUser(activeUser.uid)
+    const activeUserFavourites = await getFavouritesByUser(activeUser.uid)
     const allFavourites = localStorage.getItem("favourites")
 
     if (!allFavourites) {
@@ -133,12 +132,4 @@ export const setFavourites =  async (movie: MovieBase) => {
             )
         }
     }
-}
-
-export const isFavourite = (movie: MovieBase) => {
-    const activeUser = JSON.parse(localStorage.getItem("activeUser"))
-    const activeUserFavourites = getFavouritesByUser(activeUser.uid)
-    return !!activeUserFavourites.movies.find(
-        item => item.kinopoiskId === movie.kinopoiskId,
-    )
 }

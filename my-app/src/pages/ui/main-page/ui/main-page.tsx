@@ -2,10 +2,11 @@ import cls from "@/pages/ui/page.module.scss"
 import { useFetchAllMoviesQuery } from "@/shared/redux/store/services/movie-service"
 import { Header } from "@/widgets/header"
 import { type PageProps } from "@pages/types/types"
-import {memo} from "react"
+import {memo, useEffect} from "react"
 import {MoviesContent} from "@/widgets/movies-content";
 import {ErrorBoundary} from "react-error-boundary";
 import {ErrorFallback} from "@/shared/ui/error-fallback";
+import {useFavourites} from "@/features/favourites/hooks/use-favourites";
 
 
 const MainPage = ({ title }: PageProps) => {
@@ -16,6 +17,7 @@ const MainPage = ({ title }: PageProps) => {
             isError: isError
         }),
     })
+    useFavourites()
 
     return (
         <>

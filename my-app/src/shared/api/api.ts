@@ -103,17 +103,3 @@ export const getFavouritesByUser = (id) => {
         }
     }
 }
-
-export const isFavourite = (movie: MovieBase) => {
-    switch (import.meta.env.VITE_API_TYPE) {
-        case "firebase": {
-            return firebaseApi.isFavourite(movie)
-        }
-        case "ls": {
-            return lsApi.isFavourite(movie)
-        }
-        default: {
-            throw new Error("API не подключено")
-        }
-    }
-}

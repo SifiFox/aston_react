@@ -8,6 +8,7 @@ import classNames from "classnames"
 
 export const AppLayout = () => {
     const { theme } = useTheme()
+
     return (
         <div className={classNames(cls.layout, `app ${theme}`)}>
             <Content>
