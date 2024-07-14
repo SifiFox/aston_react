@@ -1,8 +1,9 @@
 import { MovieBase } from "@/app/hooks/use-movies/types"
 
-export const checkAuth = () => {
+export const checkAuth = (callback) => {
     const activeUser = JSON.parse(localStorage.getItem("activeUser"))
-    return activeUser ?? null
+    callback(activeUser)
+    return null ?? activeUser
 }
 
 export const login = async ({ email, password }) => {
@@ -54,7 +55,7 @@ export const logout = () => {
     localStorage.getItem("activeUser") && localStorage.removeItem("activeUser")
 }
 
-export const getFavouritesByUser = userId => {
+export const getFavouritesByUser = async userId => {
     const favourites = localStorage.getItem("favourites")
     if (favourites) {
         return JSON.parse(favourites).find(item => item.userId === userId)
@@ -63,7 +64,7 @@ export const getFavouritesByUser = userId => {
     }
 }
 
-export const setFavourites = (movie: MovieBase) => {
+export const setFavourites =  async (movie: MovieBase) => {
     const activeUser = JSON.parse(localStorage.getItem("activeUser"))
     const activeUserFavourites = getFavouritesByUser(activeUser.uid)
     const allFavourites = localStorage.getItem("favourites")
@@ -121,7 +122,6 @@ export const setFavourites = (movie: MovieBase) => {
                 movies: [...updatedUserMovies],
             }
 
-            console.log(updatedUserFavouritesData)
             localStorage.setItem(
                 "favourites",
                 JSON.stringify([
@@ -138,5 +138,7 @@ export const setFavourites = (movie: MovieBase) => {
 export const isFavourite = (movie: MovieBase) => {
     const activeUser = JSON.parse(localStorage.getItem("activeUser"))
     const activeUserFavourites = getFavouritesByUser(activeUser.uid)
-    return !!activeUserFavourites.movies.find(item => item.kinopoiskId === movie.kinopoiskId)
+    return !!activeUserFavourites.movies.find(
+        item => item.kinopoiskId === movie.kinopoiskId,
+    )
 }

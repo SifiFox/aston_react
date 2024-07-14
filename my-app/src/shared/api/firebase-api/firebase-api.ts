@@ -1,4 +1,9 @@
-import { auth, provider } from "@/shared/config/firebase-config/firebase-config"
+import { MovieBase } from "@/app/hooks/use-movies/types"
+import {
+    auth,
+    firestore,
+    provider,
+} from "@/shared/config/firebase-config/firebase-config"
 import { message } from "antd"
 import {
     createUserWithEmailAndPassword,
@@ -7,10 +12,19 @@ import {
     signInWithPopup,
     signOut,
 } from "firebase/auth"
+import {
+    collection,
+    onSnapshot,
+    doc,
+    getDoc,
+    setDoc,
+    updateDoc
+} from "firebase/firestore"
 
 export const checkAuth = (callback: (data) => void) => {
     onAuthStateChanged(auth, user => {
         callback(user)
+        return user
     })
 }
 
@@ -39,3 +53,30 @@ export const registration = async ({ email, password }) => {
 }
 
 export const logout = () => signOut(auth)
+
+export const getFavouritesByUser = async (userId) => {
+    const userRef = doc(firestore, 'usersData', userId)
+    const docSnap = await getDoc(userRef);
+    const movies = docSnap.data().favourites.map(item => {return {kinopoiskId: item}})
+    return {
+        userId,
+        movies
+    }
+}
+
+export const setFavourites = async (movie: MovieBase) => {
+    console.log('fb setFav')
+    return true
+}
+
+export const isFavourite = (movie: MovieBase) => {
+    checkAuth(async (user) => {
+        if (user) {
+            const { accessToken, auth } = user
+            const { currentUser } = auth
+            const { email, uid } = currentUser
+            // await getFavouritesByUser(uid)
+        }
+    })
+    // return true
+}

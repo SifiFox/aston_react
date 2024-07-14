@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     id: null,
-    email: null,
     token: null,
+    isAuth: false
 }
 
 const userSlice = createSlice({
@@ -12,13 +12,13 @@ const userSlice = createSlice({
     reducers: {
         setUser(state, action) {
             state.id = action.payload.id
-            state.email = action.payload.email
             state.token = action.payload.token
+            state.isAuth = true
         },
         removeUser(state) {
             state.id = null
-            state.email = null
             state.token = null
+            state.isAuth = false
         },
     },
 })

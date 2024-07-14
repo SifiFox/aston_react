@@ -1,6 +1,4 @@
-import { useAuth } from "@/app/hooks/use-auth/use-auth"
 import cls from "@/pages/ui/page.module.scss"
-import { getFavouritesByUser } from "@/shared/api/ls-api/ls-api"
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks"
 import { useFetchAllMoviesQuery } from "@/shared/redux/store/services/movie-service"
 import { setFavouritesStore} from "@/shared/redux/store/slices/favourites-slice"
@@ -10,14 +8,15 @@ import { MoviesContent } from "@/widgets/movies-content"
 import { type PageProps } from "@pages/types/types"
 import { useEffect } from "react"
 import { ErrorBoundary } from "react-error-boundary"
+import {getFavouritesByUser} from "@/shared/api/api";
 
 
 const FavouritesPage = ({ title }: PageProps) => {
-    const { id } = useAuth()
     const dispatch = useAppDispatch()
     const { movies: userFavourites } = useAppSelector(state => state.favourites)
+    const { id } = useAppSelector(state => state.user)
 
-    const { movies, moviesCount, isError } = useFetchAllMoviesQuery(undefined, {
+    const { movies, isError } = useFetchAllMoviesQuery(undefined, {
         selectFromResult: ({ data, isError }) => ({
             movies: data?.movies,
             moviesCount: data?.moviesCount,
@@ -25,9 +24,12 @@ const FavouritesPage = ({ title }: PageProps) => {
         }),
     })
 
+
     useEffect(() => {
         if (movies) {
-            dispatch(setFavouritesStore(getFavouritesByUser(id)))
+            getFavouritesByUser(id).then(res => {
+                dispatch(setFavouritesStore(res.movies))
+            })
         }
     }, [movies])
 
@@ -39,8 +41,8 @@ const FavouritesPage = ({ title }: PageProps) => {
                 <div className={cls.pageContent}>
                     <ErrorBoundary FallbackComponent={ErrorFallback}>
                         <MoviesContent
-                            movies={userFavourites.movies}
-                            moviesCount={userFavourites.movies?.length}
+                            movies={userFavourites?.movies}
+                            moviesCount={userFavourites?.movies?.length}
                             isError={isError}
                         />
                     </ErrorBoundary>

@@ -10,32 +10,29 @@ import { Link, useNavigate } from "react-router-dom"
 import cls from "./movie-card.module.scss"
 import {useAppDispatch} from "@/shared/redux/hooks";
 import {setFavouritesStore} from "@/shared/redux/store/slices/favourites-slice";
-import {getFavouritesByUser} from "@/shared/api/ls-api/ls-api";
+// import {getFavouritesByUser} from "@/shared/api/ls-api/ls-api";
 
 
 const { Meta } = Card
 
 export const MovieCard = (props: { movie: MovieBase }) => {
-    const { id } = useAuth()
     const { movie } = props
     const navigation = useNavigate()
-    const { isAuth } = useAuth()
-    const dispatch = useAppDispatch()
     const [isMovieFavourite, setIsMovieFavourite] = useState(
-        isAuth ? isFavourite(movie) : false,
+        // isAuth ? isFavourite(movie) : false,
     )
 
     const handleClickFavourite = () => {
-        if (!isAuth) {
-            message.error(
-                "Действие доступно только авторизованным пользователям",
-            )
-            navigation(RoutePath.login)
-        } else {
-            setFavourites(movie)
-            setIsMovieFavourite(isFavourite(movie))
-            dispatch(setFavouritesStore(getFavouritesByUser(id)))
-        }
+        // if (isAuth) {
+        //     message.error(
+        //         "Действие доступно только авторизованным пользователям",
+        //     )
+        //     navigation(RoutePath.login)
+        // } else {
+        //     setFavourites(movie)
+        //     setIsMovieFavourite(isFavourite(movie))
+        //     // dispatch(setFavouritesStore(getFavouritesByUser(id)))
+        // }
     }
 
     return (

@@ -1,4 +1,3 @@
-import { useAuth } from "@/app/hooks/use-auth/use-auth"
 import { useTheme } from "@/app/hooks/use-theme/use-theme"
 import { Logo } from "@/shared/ui/logo"
 import { NavActions } from "@/widgets/header/ui/nav-actions"
@@ -7,10 +6,11 @@ import { Navbar } from "@/widgets/header/ui/navbar"
 import classNames from "classnames"
 
 import cls from "./header.module.scss"
+import {useAppSelector} from "@/shared/redux/hooks";
 
 export const Header = () => {
     const { theme } = useTheme()
-    const { isAuth } = useAuth()
+    const { isAuth } = useAppSelector(state => state.user)
 
     return (
         <header className={classNames(cls.header, theme)}>
