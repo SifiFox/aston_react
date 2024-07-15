@@ -1,9 +1,8 @@
 import { getFavouritesByUser } from "@/shared/api/api"
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks"
+import { useFetchAllMoviesQuery } from "@/shared/redux/store/services/movie-service"
 import { setFavouritesStore } from "@/shared/redux/store/slices/favourites-slice"
 import { useEffect, useState } from "react"
-import {useFetchAllMoviesQuery} from "@/shared/redux/store/services/movie-service";
-
 
 export const useFavourites = () => {
     const [favourites, setFavourites] = useState(null)
@@ -11,7 +10,6 @@ export const useFavourites = () => {
     const [error, setError] = useState(false)
     const { id } = useAppSelector(state => state.user)
     const dispatch = useAppDispatch()
-
 
     useEffect(() => {
         setIsLoading(true)

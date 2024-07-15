@@ -1,8 +1,10 @@
-import { BASE_API_URL } from "@/app/api/api";
-import { MoviesBase } from "@/app/hooks/use-movies/types";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import {BaseQueryMeta, BaseQueryResult} from "@reduxjs/toolkit/dist/query/baseQueryTypes";
-
+import { BASE_API_URL } from "@/app/api/api"
+import { MoviesBase } from "@/app/hooks/use-movies/types"
+import {
+    BaseQueryMeta,
+    BaseQueryResult,
+} from "@reduxjs/toolkit/dist/query/baseQueryTypes"
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 export const kinopoiskApi = createApi({
     reducerPath: "kinopoisk",
@@ -19,13 +21,13 @@ export const kinopoiskApi = createApi({
             query: (): { url: string } => ({
                 url: `/films`,
             }),
-            transformResponse: (response: MoviesBase)  => ({
+            transformResponse: (response: MoviesBase) => ({
                 movies: response.items,
                 moviesCount: response.total,
-                moviesPages: response.totalPages
-            })
+                moviesPages: response.totalPages,
+            }),
         }),
     }),
 })
 
-export const { useFetchAllMoviesQuery } = kinopoiskApi;
+export const { useFetchAllMoviesQuery } = kinopoiskApi

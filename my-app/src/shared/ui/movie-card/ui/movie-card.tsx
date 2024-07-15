@@ -13,7 +13,6 @@ import { Link, useNavigate } from "react-router-dom"
 
 import cls from "./movie-card.module.scss"
 
-
 const { Meta } = Card
 
 export const MovieCard = (props: { movie: MovieBase }) => {
@@ -33,7 +32,9 @@ export const MovieCard = (props: { movie: MovieBase }) => {
             )
             navigation(RoutePath.login)
         }
-        setFavourites(movie)
+        setFavourites(movie).catch(err => {
+            message.error(err)
+        })
         if (isFavourite) {
             dispatch(removeMovie(movie))
         } else {

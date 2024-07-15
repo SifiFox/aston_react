@@ -4,7 +4,6 @@ import { store } from "@/shared/redux/store/store"
 import { ConfigProvider } from "antd"
 import { Provider } from "react-redux"
 
-
 export const Providers = ({ children }) => {
     return (
         <ConfigProvider

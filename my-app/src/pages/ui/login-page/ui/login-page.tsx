@@ -9,7 +9,6 @@ import { LoginForm } from "@pages/ui/login-page/ui/login-form/login-form"
 import cls from "@pages/ui/page.module.scss"
 import { Navigate } from "react-router-dom"
 
-
 export const LoginPage = ({ title }: PageProps) => {
     const { isAuth } = useAppSelector(state => state.user)
     const { handleLogin } = useAuth()

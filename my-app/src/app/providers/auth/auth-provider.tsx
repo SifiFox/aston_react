@@ -2,10 +2,14 @@ import { AuthContext } from "@/app/providers/auth/auth-context"
 import { checkAuth } from "@/shared/api/api"
 import { useAppDispatch } from "@/shared/redux/hooks"
 import { setUser } from "@/shared/redux/store/slices/user-slice"
-import { useEffect, useState } from "react"
+import PropTypes from "prop-types"
+import { ReactNode, useEffect, useState } from "react"
 
+interface Props {
+    children: ReactNode
+}
 
-export const AuthProvider = ({ children }: { children: JSX.Element }) => {
+export const AuthProvider = ({ children }: Props) => {
     const [isAuth, setIsAuth] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const dispatch = useAppDispatch()
@@ -51,4 +55,8 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
             children={children}
         />
     )
+}
+
+AuthProvider.propTypes = {
+    children: PropTypes.node.isRequired,
 }

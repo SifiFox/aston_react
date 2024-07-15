@@ -21,7 +21,13 @@ export const checkAuth = (callback: (data) => void) => {
     })
 }
 
-export const login = async ({ email, password }) => {
+export const login = async ({
+    email,
+    password,
+}: {
+    email: string
+    password: string
+}) => {
     return signInWithEmailAndPassword(auth, email, password)
         .then(res => {
             const { email, uid, accessToken } = res.user
@@ -38,7 +44,13 @@ export const loginWithGoogle = async () => {
     return signInWithPopup(auth, provider)
 }
 
-export const registration = async ({ email, password }) => {
+export const registration = async ({
+    email,
+    password,
+}: {
+    email: string
+    password: string
+}) => {
     createUserWithEmailAndPassword(auth, email, password).then(res => {
         return res.user
     })
@@ -53,7 +65,9 @@ export const getFavouritesByUser = async userId => {
     querySnapshot.forEach(doc => {
         data.push(doc.data())
     })
-    const filteredData = data.find(item => item.userId === userId)
+    const filteredData = data.find(
+        item => String(item.userId) === String(userId),
+    )
 
     return filteredData
         ? {
@@ -79,7 +93,10 @@ export const setFavourites = async (movie: MovieBase) => {
     )
     const isMovieFavourite = userData.favourites.includes(String(kinopoiskId))
     if (isMovieFavourite) {
-        userData.favourites.splice(userData.favourites.indexOf(String(kinopoiskId)), 1)
+        userData.favourites.splice(
+            userData.favourites.indexOf(String(kinopoiskId)),
+            1,
+        )
     } else {
         userData.favourites.push(String(kinopoiskId))
     }

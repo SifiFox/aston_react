@@ -1,1 +1,1 @@
-export {MoviesContent} from './ui/movies-content'
+export { MoviesContent } from "./ui/movies-content"

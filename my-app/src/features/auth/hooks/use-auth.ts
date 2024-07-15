@@ -6,7 +6,6 @@ import { Strings } from "@pages/ui/login-page/ui/login-form/login-form"
 import { message } from "antd"
 import { useNavigate } from "react-router-dom"
 
-
 export const useAuth = () => {
     const navigation = useNavigate()
     const dispatch = useAppDispatch()
@@ -42,7 +41,6 @@ export const useAuth = () => {
     }
 
     const handleLogout = () => {
-        console.log('handle logout')
         dispatch(removeUser())
         logOut()
         navigation(RoutePath.home)

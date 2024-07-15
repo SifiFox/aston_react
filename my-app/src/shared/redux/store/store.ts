@@ -2,9 +2,8 @@ import { kinopoiskApi } from "@/shared/redux/store/services/movie-service"
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { setupListeners } from "@reduxjs/toolkit/query"
 
-import userReducer from "./slices/user-slice"
 import favouritesReducer from "./slices/favourites-slice"
-
+import userReducer from "./slices/user-slice"
 
 export const rootReducer = combineReducers({
     user: userReducer,

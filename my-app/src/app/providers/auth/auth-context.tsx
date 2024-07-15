@@ -1,6 +1,6 @@
-import {createContext} from "react";
+import { createContext } from "react"
 
 export const AuthContext = createContext({
     isAuth: false,
-    isLoading: true
+    isLoading: true,
 })

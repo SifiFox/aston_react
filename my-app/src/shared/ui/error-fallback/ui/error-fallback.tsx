@@ -1,8 +1,7 @@
 import { RoutePath } from "@/shared/config/route-config/route-config"
 import { useNavigate } from "react-router-dom"
 
-
-const ErrorFallback = ({ error, resetErrorBoundary }) => {
+export const ErrorFallback = ({ error }) => {
     const navigation = useNavigate()
 
     const handleClickReset = () => {
@@ -16,5 +15,3 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
         </div>
     )
 }
-
-export { ErrorFallback }

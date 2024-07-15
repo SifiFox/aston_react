@@ -9,7 +9,6 @@ import { type PageProps } from "@pages/types/types"
 import { useEffect, useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 
-
 const FavouritesPage = ({ title }: PageProps) => {
     const { movies: userFavourites } = useAppSelector(state => state.favourites)
     const { movies, isError } = useFetchAllMoviesQuery(undefined, {
@@ -28,7 +27,8 @@ const FavouritesPage = ({ title }: PageProps) => {
                 movies.filter(movie =>
                     userFavourites.some(
                         favourite =>
-                            String(favourite.kinopoiskId) === String(movie.kinopoiskId),
+                            String(favourite.kinopoiskId) ===
+                            String(movie.kinopoiskId),
                     ),
                 ),
             )
