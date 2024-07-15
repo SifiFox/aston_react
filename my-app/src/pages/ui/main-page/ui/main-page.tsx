@@ -6,7 +6,7 @@ import { Header } from "@/widgets/header"
 import { MoviesContent } from "@/widgets/movies-content"
 import { type PageProps } from "@pages/types/types"
 import PropTypes from "prop-types"
-import { memo, useEffect } from "react"
+import { memo } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 
 const MainPage = ({ title }: PageProps) => {

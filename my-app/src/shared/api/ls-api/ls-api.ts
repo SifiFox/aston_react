@@ -1,4 +1,4 @@
-import { MovieBase } from "@/app/hooks/use-movies/types"
+import type { MovieBase } from "@/app/hooks/use-movies/types"
 
 export const checkAuth = callback => {
     const activeUser = JSON.parse(localStorage.getItem("activeUser"))

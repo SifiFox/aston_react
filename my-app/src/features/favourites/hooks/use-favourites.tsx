@@ -1,6 +1,5 @@
 import { getFavouritesByUser } from "@/shared/api/api"
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks"
-import { useFetchAllMoviesQuery } from "@/shared/redux/store/services/movie-service"
 import { setFavouritesStore } from "@/shared/redux/store/slices/favourites-slice"
 import { useEffect, useState } from "react"
 
@@ -20,6 +19,8 @@ export const useFavourites = () => {
             })
             .catch(err => setError(err))
             .finally(() => setIsLoading(false))
+        // для первого рендера нужен пустой массив зависимостей
+        /* eslint-disable react-hooks/exhaustive-deps*/
     }, [])
 
     return {

@@ -1,9 +1,6 @@
 import { BASE_API_URL } from "@/app/api/api"
-import { MoviesBase } from "@/app/hooks/use-movies/types"
-import {
-    BaseQueryMeta,
-    BaseQueryResult,
-} from "@reduxjs/toolkit/dist/query/baseQueryTypes"
+import type { MoviesBase } from "@/app/hooks/use-movies/types"
+
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 export const kinopoiskApi = createApi({

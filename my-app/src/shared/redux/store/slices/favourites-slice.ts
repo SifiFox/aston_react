@@ -1,4 +1,4 @@
-import { MovieBase } from "@/app/hooks/use-movies/types"
+import type { MovieBase } from "@/app/hooks/use-movies/types"
 import { createSlice } from "@reduxjs/toolkit"
 
 export interface FavouritesState {

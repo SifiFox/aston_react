@@ -1,5 +1,5 @@
 import { useAuth } from "@/features/auth/hooks/use-auth"
-import { loginWithGoogle, registration } from "@/shared/api/api"
+import { loginWithGoogle } from "@/shared/api/api"
 import { RoutePath } from "@/shared/config/route-config/route-config"
 import { useAppSelector } from "@/shared/redux/hooks"
 import { AppForm } from "@/widgets/app-form"
@@ -7,9 +7,7 @@ import { Header } from "@/widgets/header"
 import { type PageProps } from "@pages/types/types"
 import cls from "@pages/ui/page.module.scss"
 import { RegistrationForm } from "@pages/ui/registration-page/ui/registration-form/registration-form"
-import { message } from "antd"
-import { useEffect } from "react"
-import { Navigate, useNavigate } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 
 export const RegistrationPage = ({ title }: PageProps) => {
     const { isAuth } = useAppSelector(state => state.user)

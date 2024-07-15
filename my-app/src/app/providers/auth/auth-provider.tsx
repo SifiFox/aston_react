@@ -3,7 +3,8 @@ import { checkAuth } from "@/shared/api/api"
 import { useAppDispatch } from "@/shared/redux/hooks"
 import { setUser } from "@/shared/redux/store/slices/user-slice"
 import PropTypes from "prop-types"
-import { ReactNode, useEffect, useState } from "react"
+import type { ReactNode} from "react";
+import { useEffect, useState } from "react"
 
 interface Props {
     children: ReactNode
@@ -47,6 +48,9 @@ export const AuthProvider = ({ children }: Props) => {
 
             setIsLoading(false)
         })
+
+        // для первого рендера нужен пустой массив зависимостей
+        /* eslint-disable react-hooks/exhaustive-deps*/
     }, [])
 
     return (

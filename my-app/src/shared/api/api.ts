@@ -1,4 +1,4 @@
-import { MovieBase } from "@/app/hooks/use-movies/types"
+import type { MovieBase } from "@/app/hooks/use-movies/types"
 import { type Strings } from "@pages/ui/login-page/ui/login-form/login-form"
 
 import * as firebaseApi from "./firebase-api/firebase-api"

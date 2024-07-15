@@ -1,4 +1,4 @@
-import { MovieBase } from "@/app/hooks/use-movies/types"
+import type { MovieBase } from "@/app/hooks/use-movies/types"
 import {
     auth,
     firestore,
