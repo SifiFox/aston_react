@@ -1,3 +1,4 @@
+import type { MovieBase } from "@/app/hooks/use-movies/types"
 import { type Strings } from "@pages/ui/login-page/ui/login-form/login-form"
 
 import * as firebaseApi from "./firebase-api/firebase-api"
@@ -9,7 +10,7 @@ export const checkAuth = callback => {
             return callback ? firebaseApi.checkAuth(callback) : null
         }
         case "ls": {
-            return lsApi.checkAuth()
+            return callback ? lsApi.checkAuth(callback) : null
         }
         default: {
             throw new Error("API не подключено")
@@ -67,6 +68,34 @@ export const logOut = () => {
         }
         case "ls": {
             return lsApi.logout()
+        }
+        default: {
+            throw new Error("API не подключено")
+        }
+    }
+}
+
+export const setFavourites = (movie: MovieBase) => {
+    switch (import.meta.env.VITE_API_TYPE) {
+        case "firebase": {
+            return firebaseApi.setFavourites(movie)
+        }
+        case "ls": {
+            return lsApi.setFavourites(movie)
+        }
+        default: {
+            throw new Error("API не подключено")
+        }
+    }
+}
+
+export const getFavouritesByUser = id => {
+    switch (import.meta.env.VITE_API_TYPE) {
+        case "firebase": {
+            return firebaseApi.getFavouritesByUser(id)
+        }
+        case "ls": {
+            return lsApi.getFavouritesByUser(id)
         }
         default: {
             throw new Error("API не подключено")

@@ -1,50 +1,25 @@
-import { useAuth } from "@/app/hooks/use-auth/use-auth"
-import { login, loginWithGoogle } from "@/shared/api/api"
+import { useAuth } from "@/features/auth/hooks/use-auth"
+import { loginWithGoogle } from "@/shared/api/api"
 import { RoutePath } from "@/shared/config/route-config/route-config"
-import { useAppDispatch } from "@/shared/redux/hooks"
-import { setUser } from "@/shared/redux/store/slices/user-slice"
+import { useAppSelector } from "@/shared/redux/hooks"
 import { AppForm } from "@/widgets/app-form"
 import { Header } from "@/widgets/header"
 import { type PageProps } from "@pages/types/types"
-import {
-    LoginForm,
-    type Strings,
-} from "@pages/ui/login-page/ui/login-form/login-form"
+import { LoginForm } from "@pages/ui/login-page/ui/login-form/login-form"
 import cls from "@pages/ui/page.module.scss"
-import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 
 export const LoginPage = ({ title }: PageProps) => {
-    const dispatch = useAppDispatch()
-    const navigation = useNavigate()
-    const { isAuth } = useAuth()
-
-    useEffect(() => {
-        if (isAuth) {
-            navigation(RoutePath.home)
-        }
-    }, [isAuth, navigation])
-
-    const handleLogin = async (data: Strings) => {
-        const { email, password } = data
-        await login({ email, password }).then(res => {
-            const { email, uid, accessToken } = res
-            dispatch(
-                setUser({
-                    email,
-                    id: uid,
-                    token: accessToken,
-                }),
-            )
-            navigation(RoutePath.login)
-        })
-    }
+    const { isAuth } = useAppSelector(state => state.user)
+    const { handleLogin } = useAuth()
 
     const loginGoogle = () => {
         loginWithGoogle()
     }
 
-    return (
+    return isAuth ? (
+        <Navigate to={RoutePath.home} />
+    ) : (
         <>
             <Header />
             <div className={cls.pageWrapper}>

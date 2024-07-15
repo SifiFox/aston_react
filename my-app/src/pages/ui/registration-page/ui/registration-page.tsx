@@ -1,41 +1,25 @@
-import { useAuth } from "@/app/hooks/use-auth/use-auth"
-import { loginWithGoogle, registration } from "@/shared/api/api"
+import { useAuth } from "@/features/auth/hooks/use-auth"
+import { loginWithGoogle } from "@/shared/api/api"
 import { RoutePath } from "@/shared/config/route-config/route-config"
+import { useAppSelector } from "@/shared/redux/hooks"
 import { AppForm } from "@/widgets/app-form"
 import { Header } from "@/widgets/header"
 import { type PageProps } from "@pages/types/types"
 import cls from "@pages/ui/page.module.scss"
 import { RegistrationForm } from "@pages/ui/registration-page/ui/registration-form/registration-form"
-import { message } from "antd"
-import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 
 export const RegistrationPage = ({ title }: PageProps) => {
-    const { isAuth } = useAuth()
-    const navigation = useNavigate()
-
-    useEffect(() => {
-        if (isAuth) {
-            navigation(RoutePath.home)
-        }
-    }, [isAuth, navigation])
-
-    const handleRegistration = async data => {
-        try {
-            await registration({
-                email: data.email,
-                password: data.password,
-            })
-        } catch (err) {
-            message.error(err.message)
-        }
-    }
+    const { isAuth } = useAppSelector(state => state.user)
+    const { handleRegistration } = useAuth()
 
     const loginGoogle = () => {
         loginWithGoogle()
     }
 
-    return (
+    return isAuth ? (
+        <Navigate to={RoutePath.home} />
+    ) : (
         <>
             <Header />
             <div className={cls.pageWrapper}>
