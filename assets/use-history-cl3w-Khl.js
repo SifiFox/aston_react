@@ -1,0 +1,1 @@
+import{h as t,u as p,b as l,o as y,p as f}from"./index-gxMem5cA.js";const S=()=>{const[o,r]=t.useState(null),[a,e]=t.useState(!1),[i,c]=t.useState(!1),{id:u}=p(s=>s.user),n=l();return t.useEffect(()=>{e(!0),y(u).then(s=>{r(s),n(f(s.history))}).catch(s=>c(s)).finally(()=>e(!1))},[]),{history:o,isLoading:a,error:i}};export{S as u};
