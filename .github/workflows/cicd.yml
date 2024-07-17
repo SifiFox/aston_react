@@ -26,8 +26,8 @@ jobs:
           key: node_modules-${{ hashFiles('**/yarn.lock')}}
       - name: install dependencies
         run: yarn ci
-      - name: lint app
-        run: yarn run lint
+      - name: Run lint
+        run: yarn run eslint . --ext .ts,.tsx
   prettier:
     runs-on: ubuntu-latest
     needs: eslint
