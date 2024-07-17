@@ -1,6 +1,5 @@
+import {type Strings} from "@/app/api/types";
 import { type MovieBase } from "@/app/hooks/use-movies/types"
-import { type Strings } from "@pages/ui/login-page/ui/login-form/login-form"
-
 import {api} from "@/app/api/contstants";
 
 if (!api) {

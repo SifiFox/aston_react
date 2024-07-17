@@ -1,3 +1,4 @@
+import {firebaseData, LoginParams} from "@/app/api/types"
 import type { MovieBase } from "@/app/hooks/use-movies/types"
 import {
     auth,
@@ -14,6 +15,10 @@ import {
 } from "firebase/auth"
 import { collection, doc, getDocs, setDoc, updateDoc } from "firebase/firestore"
 
+
+
+const querySnapshot = await getDocs(collection(firestore, "usersData"))
+
 export const checkAuth = (callback: (data) => void) => {
     onAuthStateChanged(auth, user => {
         callback(user)
@@ -21,13 +26,11 @@ export const checkAuth = (callback: (data) => void) => {
     })
 }
 
-export const login = async ({
-    email,
-    password,
-}: {
-    email: string
-    password: string
-}) => {
+export const loginWithGoogle = async () => {
+    return signInWithPopup(auth, provider)
+}
+
+export const login = async ({ email, password }: LoginParams) => {
     return signInWithEmailAndPassword(auth, email, password)
         .then(res => {
             const { email, uid, accessToken } = res.user
@@ -40,30 +43,18 @@ export const login = async ({
         })
 }
 
-export const loginWithGoogle = async () => {
-    return signInWithPopup(auth, provider)
-}
-
-export const registration = async ({
-    email,
-    password,
-}: {
-    email: string
-    password: string
-}) => {
+export const registration = async ({ email, password }: LoginParams) => {
     createUserWithEmailAndPassword(auth, email, password).then(res => {
         return res.user
     })
-    return true
 }
 
 export const logout = () => signOut(auth)
 
-export const getFavouritesByUser: ReturnType<Promise<{ movies: any; userId: number | string }>> = async userId => {
-    const querySnapshot = await getDocs(collection(firestore, "usersData"))
-    const data = []
+export const getFavouritesByUser = async (userId: number | string) => {
+    const data: firebaseData[] = []
     querySnapshot.forEach(doc => {
-        data.push(doc.data())
+        data.push(<firebaseData>doc.data())
     })
     const filteredData = data.find(
         item => String(item.userId) === String(userId),
@@ -81,11 +72,10 @@ export const getFavouritesByUser: ReturnType<Promise<{ movies: any; userId: numb
         : null
 }
 
-export const getHistoryByUser = async userId => {
-    const querySnapshot = await getDocs(collection(firestore, "usersData"))
-    const data = []
+export const getHistoryByUser = async (userId: number | string) => {
+    const data: firebaseData[] = []
     querySnapshot.forEach(doc => {
-        data.push(doc.data())
+        data.push(<firebaseData>doc.data())
     })
     const filteredData = data.find(
         item => String(item.userId) === String(userId),
@@ -104,11 +94,10 @@ export const getHistoryByUser = async userId => {
 }
 
 export const setFavourites = async (movie: MovieBase) => {
-    const querySnapshot = await getDocs(collection(firestore, "usersData"))
-    const data = []
+    const data: firebaseData[] = []
 
     querySnapshot.forEach(doc => {
-        data.push(doc.data())
+        data.push(<firebaseData>doc.data())
     })
 
     const { kinopoiskId } = movie
@@ -131,11 +120,10 @@ export const setFavourites = async (movie: MovieBase) => {
 }
 
 export const setHistory = async (request: string) => {
-    const querySnapshot = await getDocs(collection(firestore, "usersData"))
-    const data = []
+    const data: firebaseData[] = []
 
     querySnapshot.forEach(doc => {
-        data.push(doc.data())
+        data.push(<firebaseData>doc.data())
     })
 
     const userData = data.find(
@@ -143,7 +131,7 @@ export const setHistory = async (request: string) => {
     )
 
     if (!userData) {
-        const newUserData = {
+        const newUserData: firebaseData = {
             userId: auth.currentUser.uid,
             favourites: [],
             history: [request],
@@ -163,11 +151,10 @@ export const setHistory = async (request: string) => {
 }
 
 export const removeFromHistory = async (request: string) => {
-    const querySnapshot = await getDocs(collection(firestore, "usersData"))
-    const data = []
+    const data: firebaseData[] = []
 
     querySnapshot.forEach(doc => {
-        data.push(doc.data())
+        data.push(<firebaseData>doc.data())
     })
 
     const userData = data.find(
@@ -181,11 +168,10 @@ export const removeFromHistory = async (request: string) => {
 }
 
 export const clearHistory = async () => {
-    const querySnapshot = await getDocs(collection(firestore, "usersData"))
-    const data = []
+    const data: firebaseData[] = []
 
     querySnapshot.forEach(doc => {
-        data.push(doc.data())
+        data.push(<firebaseData>doc.data())
     })
 
     const userData = data.find(

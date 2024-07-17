@@ -1,73 +1,63 @@
-import type { MovieBase } from "@/app/hooks/use-movies/types"
+import {Nullable} from "vitest";
+import {MovieBase} from "@/app/hooks/use-movies/types";
+
+export type Strings = Record<string, string>
 
 export enum ApiTypes {
     FIREBASE = "firebase",
     LOCALSTORAGE = "ls",
 }
 
-export type lsFunctions = {
-    getFavouritesByUser: (userId) => Promise<unknown>
-    loginWithGoogle: () => Promise<string>
-    getHistoryByUser: (userId) => Promise<unknown>
-    logout: () => void
-    removeFromHistory: (request: string) => Promise<void>
-    clearHistory: () => Promise<void>
-    checkAuth: (callback) => unknown
-    registration: ({
-        email,
-        password,
-    }: {
-        email: string
-        password: string
-    }) => Promise<void>
-    setHistory: (request: string) => Promise<unknown>
-    login: ({
-        email,
-        password,
-    }: {
-        email: string
-        password: string
-    }) => Promise<{
-        uid: number | string
-        accessToken: string
-        email: string
-    }>
-    setFavourites: (movie: MovieBase) => Promise<void>
+export interface firebaseData {
+    userId: number | string,
+    favourites: string[],
+    history: string[]
 }
 
-export type firebaseFunctions = {
-    getFavouritesByUser: (
-        userId,
-    ) => Promise<{ movies: any; userId: number | string }>
-    loginWithGoogle: () => Promise<unknown>
-    login: ({
-        email,
-        password,
-    }: {
-        email: string
-        password: string
-    }) => Promise<
-        | {
-              uid: string
-              accessToken: string
-              email: string
-          }
-        | Error
-    >
-    logout: () => Promise<void>
+export interface LoginParams {
+    email: string,
+    password: string
+}
+
+export interface LsUserCredentials {
+    uid: number | string,
+    email: string,
+    accessToken: number | string,
+}
+
+export interface LsUser {
+    uid: number | string,
+    email: string,
+    password: string
+}
+
+
+export interface lsFavourites {
+    movies: MovieBase[]
+    userId: number | string
+}
+
+interface HistoryRequest {
+    request: string
+}
+
+export interface LsHistory {
+    userId: number | string
+    history: HistoryRequest[]
+}
+
+type UnknownPromise = Promise<unknown> | Error;
+
+export type apiFunctions = {
+    checkAuth: (callback: () => void) => Nullable<unknown>,
+    loginWithGoogle: () => Promise<unknown>,
+    login: ({email, password}: LoginParams) => UnknownPromise,
+    registration: ({email, password}: LoginParams) => UnknownPromise,
+    logout: () => void,
+    getFavouritesByUser: (id: number | string) => UnknownPromise,
+    getHistoryByUser: (id: number | string) => UnknownPromise,
+    setFavourites: (movie: MovieBase) => Promise<void>,
+    setHistory: (request: string) => Promise<void>,
+    removeFromHistory: (request: string) => Promise<void>,
     clearHistory: () => Promise<void>
-    removeFromHistory: (request: string) => Promise<void>
-    checkAuth: (callback: (data) => void) => void
-    setHistory: (request: string) => Promise<void>
-    getHistoryByUser: (
-        userId,
-    ) => Promise<{ history: any; userId: number | string }>
-    registration: ({
-        email,
-        password,
-    }: {
-        email: string
-        password: string
-    }) => Promise<boolean>
-    setFavourites: (movie: MovieBase) => Promise<void>
 }
