@@ -1,7 +1,4 @@
 import type { MovieBase } from "@/app/hooks/use-movies/types"
-import {signInWithPopup} from "firebase/auth";
-import {auth, provider} from "@/shared/config/firebase-config/firebase-config";
-
 export const checkAuth = callback => {
     const activeUser = JSON.parse(localStorage.getItem("activeUser"))
     callback(activeUser)
