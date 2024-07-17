@@ -38,7 +38,7 @@ jobs:
       - name: install dependencies
         run: yarn ci
       - name: Run lint
-        run: yarn run eslint . --ext .ts,.tsx
+        run: yarn run eslint .
   prettier:
     runs-on: ubuntu-latest
     needs: eslint
