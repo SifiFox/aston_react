@@ -9,7 +9,7 @@ export const makeGetIsMovieFavourite = () => {
     return createSelector(
         [getFavourites, (_: RootState, kinopoiskId: number) => kinopoiskId],
         (movies: MovieBase[], kinopoiskId: number) =>
-            movies.some(
+            movies?.some(
                 movie => String(movie.kinopoiskId) === String(kinopoiskId),
             ),
     )

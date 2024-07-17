@@ -102,3 +102,58 @@ export const getFavouritesByUser = id => {
         }
     }
 }
+
+export const setHistory = (request: string) => {
+    switch (import.meta.env.VITE_API_TYPE) {
+        case "firebase": {
+            return firebaseApi.setHistory(request)
+        }
+        case "ls": {
+            return lsApi.setHistory(request)
+        }
+        default: {
+            throw new Error("API не подключено")
+        }
+    }
+}
+
+export const clearHistory = () => {
+    switch (import.meta.env.VITE_API_TYPE) {
+        case "firebase": {
+            return firebaseApi.clearHistory()
+        }
+        case "ls": {
+            return lsApi.clearHistory()
+        }
+        default: {
+            throw new Error("API не подключено")
+        }
+    }
+}
+
+export const removeFromHistory = (value: string) => {
+    switch (import.meta.env.VITE_API_TYPE) {
+        case "firebase": {
+            return firebaseApi.removeFromHistory(value)
+        }
+        case "ls": {
+            return lsApi.removeFromHistory(value)
+        }
+        default: {
+            throw new Error("API не подключено")
+        }
+    }
+}
+export const getHistoryByUser = id => {
+    switch (import.meta.env.VITE_API_TYPE) {
+        case "firebase": {
+            return firebaseApi.getHistoryByUser(id)
+        }
+        case "ls": {
+            return lsApi.getHistoryByUser(id)
+        }
+        default: {
+            throw new Error("API не подключено")
+        }
+    }
+}

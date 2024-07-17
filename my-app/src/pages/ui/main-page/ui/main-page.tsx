@@ -1,9 +1,11 @@
 import { useFavourites } from "@/features/favourites/hooks/use-favourites"
+import { useHistory } from "@/features/history/hooks/use-history"
 import cls from "@/pages/ui/page.module.scss"
 import { useFetchAllMoviesQuery } from "@/shared/redux/store/services/movie-service"
 import { ErrorFallback } from "@/shared/ui/error-fallback"
 import { Header } from "@/widgets/header"
 import { MoviesContent } from "@/widgets/movies-content"
+import { SearchComponent } from "@/widgets/search"
 import { type PageProps } from "@pages/types/types"
 import PropTypes from "prop-types"
 import { memo } from "react"
@@ -18,6 +20,7 @@ const MainPage = ({ title }: PageProps) => {
         }),
     })
     useFavourites()
+    useHistory()
 
     return (
         <>
@@ -26,6 +29,7 @@ const MainPage = ({ title }: PageProps) => {
                 <h1 className={cls.pageTitle}>{title}</h1>
                 <div className={cls.pageContent}>
                     <ErrorBoundary FallbackComponent={ErrorFallback}>
+                        <SearchComponent />
                         <MoviesContent
                             movies={movies}
                             moviesCount={moviesCount}

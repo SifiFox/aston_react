@@ -81,17 +81,42 @@ export const getFavouritesByUser = async userId => {
         : null
 }
 
-export const setFavourites = async (movie: MovieBase) => {
+export const getHistoryByUser = async userId => {
     const querySnapshot = await getDocs(collection(firestore, "usersData"))
     const data = []
     querySnapshot.forEach(doc => {
         data.push(doc.data())
     })
+    const filteredData = data.find(
+        item => String(item.userId) === String(userId),
+    )
+
+    return filteredData
+        ? {
+              userId: filteredData.userId,
+              history: filteredData.history.map(item => {
+                  return {
+                      request: item,
+                  }
+              }),
+          }
+        : null
+}
+
+export const setFavourites = async (movie: MovieBase) => {
+    const querySnapshot = await getDocs(collection(firestore, "usersData"))
+    const data = []
+
+    querySnapshot.forEach(doc => {
+        data.push(doc.data())
+    })
+
     const { kinopoiskId } = movie
     const userData = data.find(
         item => String(item.userId) === String(auth.currentUser.uid),
     )
     const isMovieFavourite = userData.favourites.includes(String(kinopoiskId))
+
     if (isMovieFavourite) {
         userData.favourites.splice(
             userData.favourites.indexOf(String(kinopoiskId)),
@@ -100,6 +125,65 @@ export const setFavourites = async (movie: MovieBase) => {
     } else {
         userData.favourites.push(String(kinopoiskId))
     }
+
+    const docRef = doc(firestore, "usersData", auth.currentUser.uid)
+    await updateDoc(docRef, userData)
+}
+
+export const setHistory = async (request: string) => {
+    const querySnapshot = await getDocs(collection(firestore, "usersData"))
+    const data = []
+
+    querySnapshot.forEach(doc => {
+        data.push(doc.data())
+    })
+
+    const userData = data.find(
+        item => String(item.userId) === String(auth.currentUser.uid),
+    )
+
+    const isRequestInHistory = userData.history.includes(String(request))
+
+    if (!isRequestInHistory) {
+        userData.history.push(String(request))
+    }
+
+    const docRef = doc(firestore, "usersData", auth.currentUser.uid)
+    await updateDoc(docRef, userData)
+}
+
+export const removeFromHistory = async (request: string) => {
+    const querySnapshot = await getDocs(collection(firestore, "usersData"))
+    const data = []
+
+    querySnapshot.forEach(doc => {
+        data.push(doc.data())
+    })
+
+    const userData = data.find(
+        item => String(item.userId) === String(auth.currentUser.uid),
+    )
+
+    userData.history.splice(userData.history.indexOf(String(request)), 1)
+
+    const docRef = doc(firestore, "usersData", auth.currentUser.uid)
+    await updateDoc(docRef, userData)
+}
+
+export const clearHistory = async () => {
+    const querySnapshot = await getDocs(collection(firestore, "usersData"))
+    const data = []
+
+    querySnapshot.forEach(doc => {
+        data.push(doc.data())
+    })
+
+    const userData = data.find(
+        item => String(item.userId) === String(auth.currentUser.uid),
+    )
+
+    userData.history = []
+
     const docRef = doc(firestore, "usersData", auth.currentUser.uid)
     await updateDoc(docRef, userData)
 }

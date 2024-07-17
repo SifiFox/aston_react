@@ -63,6 +63,15 @@ export const getFavouritesByUser = async userId => {
     }
 }
 
+export const getHistoryByUser = async userId => {
+    const history = localStorage.getItem("history")
+    if (history) {
+        return JSON.parse(history).find(item => item.userId === userId)
+    } else {
+        return []
+    }
+}
+
 export const setFavourites = async (movie: MovieBase) => {
     const activeUser = JSON.parse(localStorage.getItem("activeUser"))
     const activeUserFavourites = await getFavouritesByUser(activeUser.uid)
@@ -132,4 +141,99 @@ export const setFavourites = async (movie: MovieBase) => {
             )
         }
     }
+}
+
+export const setHistory = async (request: string) => {
+    const activeUser = JSON.parse(localStorage.getItem("activeUser"))
+    const activeUserHistory = await getHistoryByUser(activeUser.uid)
+    const allHistory = localStorage.getItem("history")
+
+    if (!allHistory) {
+        localStorage.setItem(
+            "history",
+            JSON.stringify([
+                {
+                    userId: activeUser.uid,
+                    history: [{ request: request }],
+                },
+            ]),
+        )
+    }
+    if (allHistory && !activeUserHistory) {
+        localStorage.setItem(
+            "history",
+            JSON.stringify([
+                ...JSON.parse(allHistory),
+                {
+                    userId: activeUser.uid,
+                    history: [{ request: request }],
+                },
+            ]),
+        )
+    }
+
+    if (allHistory && activeUserHistory) {
+        const isRequestInHistory = !!activeUserHistory.history.find(
+            item => item.request === request,
+        )
+        if (isRequestInHistory) {
+            return JSON.parse(allHistory)
+        } else {
+            const updatedUserHistory = [...activeUserHistory.history]
+            const updatedUserFavouritesData = {
+                ...activeUserHistory,
+                history: [...updatedUserHistory, { request }],
+            }
+
+            localStorage.setItem(
+                "history",
+                JSON.stringify([
+                    ...JSON.parse(allHistory).filter(
+                        item => item.userId !== activeUser.uid,
+                    ),
+                    updatedUserFavouritesData,
+                ]),
+            )
+        }
+    }
+}
+
+export const clearHistory = async () => {
+    const activeUser = JSON.parse(localStorage.getItem("activeUser"))
+    const activeUserHistory = await getHistoryByUser(activeUser.uid)
+    const allHistory = localStorage.getItem("history")
+
+    activeUserHistory.history = []
+
+    if (allHistory && activeUserHistory) {
+        localStorage.setItem(
+            "history",
+            JSON.stringify([
+                ...JSON.parse(allHistory).filter(
+                    item => item.userId !== activeUser.uid,
+                ),
+                activeUserHistory,
+            ]),
+        )
+    }
+}
+
+export const removeFromHistory = async (request: string) => {
+    const activeUser = JSON.parse(localStorage.getItem("activeUser"))
+    const activeUserHistory = await getHistoryByUser(activeUser.uid)
+    const allHistory = localStorage.getItem("history")
+
+    activeUserHistory.history = activeUserHistory.history.filter(
+        item => item.request !== request,
+    )
+
+    localStorage.setItem(
+        "history",
+        JSON.stringify([
+            ...JSON.parse(allHistory).filter(
+                item => item.userId !== activeUser.uid,
+            ),
+            activeUserHistory,
+        ]),
+    )
 }

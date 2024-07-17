@@ -6,7 +6,11 @@ import cls from "./navbar.module.scss"
 
 export const Navbar = () => {
     const location = useLocation()
-    const navbarItems = [RouteConfig.home, RouteConfig.favourites]
+    const navbarItems = [
+        RouteConfig.home,
+        RouteConfig.favourites,
+        RouteConfig.history,
+    ]
 
     return (
         <nav>

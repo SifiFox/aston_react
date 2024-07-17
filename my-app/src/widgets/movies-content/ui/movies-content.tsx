@@ -3,9 +3,6 @@ import cls from "@pages/ui/page.module.scss"
 
 export const MoviesContent = ({ movies, moviesCount, isError }) => {
     if (isError) {
-        if (!movies) {
-            throw new Error("У вас нет избранных фильмов")
-        }
         throw new Error("Не удалось загрузить фильмы")
     }
 
