@@ -17,7 +17,7 @@ import { collection, doc, getDocs, setDoc, updateDoc } from "firebase/firestore"
 
 
 
-const querySnapshot = await getDocs(collection(firestore, "usersData"))
+
 
 export const checkAuth = (callback: (data) => void) => {
     onAuthStateChanged(auth, user => {
@@ -52,6 +52,7 @@ export const registration = async ({ email, password }: LoginParams) => {
 export const logout = () => signOut(auth)
 
 export const getFavouritesByUser = async (userId: number | string) => {
+    const querySnapshot = await getDocs(collection(firestore, "usersData"))
     const data: firebaseData[] = []
     querySnapshot.forEach(doc => {
         data.push(doc.data() as firebaseData)
@@ -73,6 +74,7 @@ export const getFavouritesByUser = async (userId: number | string) => {
 }
 
 export const getHistoryByUser = async (userId: number | string) => {
+    const querySnapshot = await getDocs(collection(firestore, "usersData"))
     const data: firebaseData[] = []
     querySnapshot.forEach(doc => {
         data.push(doc.data() as firebaseData)
@@ -94,6 +96,7 @@ export const getHistoryByUser = async (userId: number | string) => {
 }
 
 export const setFavourites = async (movie: MovieBase) => {
+    const querySnapshot = await getDocs(collection(firestore, "usersData"))
     const data: firebaseData[] = []
 
     querySnapshot.forEach(doc => {
@@ -120,6 +123,7 @@ export const setFavourites = async (movie: MovieBase) => {
 }
 
 export const setHistory = async (request: string) => {
+    const querySnapshot = await getDocs(collection(firestore, "usersData"))
     const data: firebaseData[] = []
 
     querySnapshot.forEach(doc => {
@@ -151,6 +155,7 @@ export const setHistory = async (request: string) => {
 }
 
 export const removeFromHistory = async (request: string) => {
+    const querySnapshot = await getDocs(collection(firestore, "usersData"))
     const data: firebaseData[] = []
 
     querySnapshot.forEach(doc => {
@@ -168,6 +173,7 @@ export const removeFromHistory = async (request: string) => {
 }
 
 export const clearHistory = async () => {
+    const querySnapshot = await getDocs(collection(firestore, "usersData"))
     const data: firebaseData[] = []
 
     querySnapshot.forEach(doc => {
