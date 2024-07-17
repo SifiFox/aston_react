@@ -1,4 +1,4 @@
-import {type Strings} from "@/app/api/types";
+import { type Strings } from "@/app/api/types";
 import { type MovieBase } from "@/app/hooks/use-movies/types"
 import {api} from "@/app/api/contstants";
 
