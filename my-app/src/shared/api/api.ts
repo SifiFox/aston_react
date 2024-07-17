@@ -15,7 +15,7 @@ export const login = ({ email, password }) => {
 };
 
 export const loginWithGoogle = () => {
-    return api.loginWithGoogle
+    return api.loginWithGoogle()
 };
 
 export const registration = (data: Strings) => {
