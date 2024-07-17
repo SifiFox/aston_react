@@ -12,7 +12,7 @@ import {
     signInWithPopup,
     signOut,
 } from "firebase/auth"
-import { collection, doc, getDocs, updateDoc } from "firebase/firestore"
+import { collection, doc, getDocs, updateDoc, setDoc } from "firebase/firestore"
 
 export const checkAuth = (callback: (data) => void) => {
     onAuthStateChanged(auth, user => {
@@ -142,14 +142,24 @@ export const setHistory = async (request: string) => {
         item => String(item.userId) === String(auth.currentUser.uid),
     )
 
-    const isRequestInHistory = userData.history.includes(String(request))
+    if(!userData){
+        const newUserData = {
+            userId: auth.currentUser.uid,
+            favourites: [],
+            history: [request]
+        }
+        const docRef = doc(firestore, "usersData", auth.currentUser.uid)
+        await setDoc(docRef, newUserData);
+    }else{
+        const isRequestInHistory = userData.history.includes(String(request))
 
-    if (!isRequestInHistory) {
-        userData.history.push(String(request))
+        if (!isRequestInHistory) {
+            userData.history.push(String(request))
+        }
+
+        const docRef = doc(firestore, "usersData", auth.currentUser.uid)
+        await updateDoc(docRef, userData)
     }
-
-    const docRef = doc(firestore, "usersData", auth.currentUser.uid)
-    await updateDoc(docRef, userData)
 }
 
 export const removeFromHistory = async (request: string) => {
