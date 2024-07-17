@@ -12,7 +12,7 @@ import {
     signInWithPopup,
     signOut,
 } from "firebase/auth"
-import { collection, doc, getDocs, updateDoc, setDoc } from "firebase/firestore"
+import { collection, doc, getDocs, setDoc, updateDoc } from "firebase/firestore"
 
 export const checkAuth = (callback: (data) => void) => {
     onAuthStateChanged(auth, user => {
@@ -59,7 +59,7 @@ export const registration = async ({
 
 export const logout = () => signOut(auth)
 
-export const getFavouritesByUser = async userId => {
+export const getFavouritesByUser: ReturnType<Promise<{ movies: any; userId: number | string }>> = async userId => {
     const querySnapshot = await getDocs(collection(firestore, "usersData"))
     const data = []
     querySnapshot.forEach(doc => {
@@ -142,15 +142,15 @@ export const setHistory = async (request: string) => {
         item => String(item.userId) === String(auth.currentUser.uid),
     )
 
-    if(!userData){
+    if (!userData) {
         const newUserData = {
             userId: auth.currentUser.uid,
             favourites: [],
-            history: [request]
+            history: [request],
         }
         const docRef = doc(firestore, "usersData", auth.currentUser.uid)
-        await setDoc(docRef, newUserData);
-    }else{
+        await setDoc(docRef, newUserData)
+    } else {
         const isRequestInHistory = userData.history.includes(String(request))
 
         if (!isRequestInHistory) {

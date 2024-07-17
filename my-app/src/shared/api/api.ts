@@ -16,8 +16,6 @@ export const login = ({ email, password }) => {
 
 export const loginWithGoogle = () => {
     return api.loginWithGoogle
-        ? api.loginWithGoogle()
-        : "Not supported feature";
 };
 
 export const registration = (data: Strings) => {
