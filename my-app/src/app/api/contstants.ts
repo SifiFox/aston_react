@@ -1,5 +1,6 @@
+import type {
+    apiFunctions} from "@/app/api/types";
 import {
-    apiFunctions,
     ApiTypes
 } from "@/app/api/types"
 import * as firebaseApi from "@/shared/api/firebase-api/firebase-api"

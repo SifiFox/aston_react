@@ -1,5 +1,5 @@
-import {Nullable} from "vitest";
-import {MovieBase} from "@/app/hooks/use-movies/types";
+import type {Nullable} from "vitest";
+import type {MovieBase} from "@/app/hooks/use-movies/types";
 
 export type Strings = Record<string, string>
 

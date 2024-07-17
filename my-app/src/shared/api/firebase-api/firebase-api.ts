@@ -1,4 +1,4 @@
-import {firebaseData, LoginParams} from "@/app/api/types"
+import type {firebaseData, LoginParams} from "@/app/api/types"
 import type { MovieBase } from "@/app/hooks/use-movies/types"
 import {
     auth,
@@ -54,7 +54,7 @@ export const logout = () => signOut(auth)
 export const getFavouritesByUser = async (userId: number | string) => {
     const data: firebaseData[] = []
     querySnapshot.forEach(doc => {
-        data.push(<firebaseData>doc.data())
+        data.push(doc.data() as firebaseData)
     })
     const filteredData = data.find(
         item => String(item.userId) === String(userId),
@@ -75,7 +75,7 @@ export const getFavouritesByUser = async (userId: number | string) => {
 export const getHistoryByUser = async (userId: number | string) => {
     const data: firebaseData[] = []
     querySnapshot.forEach(doc => {
-        data.push(<firebaseData>doc.data())
+        data.push(doc.data() as firebaseData)
     })
     const filteredData = data.find(
         item => String(item.userId) === String(userId),
@@ -97,7 +97,7 @@ export const setFavourites = async (movie: MovieBase) => {
     const data: firebaseData[] = []
 
     querySnapshot.forEach(doc => {
-        data.push(<firebaseData>doc.data())
+        data.push(doc.data() as firebaseData)
     })
 
     const { kinopoiskId } = movie
@@ -123,7 +123,7 @@ export const setHistory = async (request: string) => {
     const data: firebaseData[] = []
 
     querySnapshot.forEach(doc => {
-        data.push(<firebaseData>doc.data())
+        data.push(doc.data() as firebaseData)
     })
 
     const userData = data.find(
@@ -154,7 +154,7 @@ export const removeFromHistory = async (request: string) => {
     const data: firebaseData[] = []
 
     querySnapshot.forEach(doc => {
-        data.push(<firebaseData>doc.data())
+        data.push(doc.data() as firebaseData)
     })
 
     const userData = data.find(
@@ -171,7 +171,7 @@ export const clearHistory = async () => {
     const data: firebaseData[] = []
 
     querySnapshot.forEach(doc => {
-        data.push(<firebaseData>doc.data())
+        data.push(doc.data() as firebaseData)
     })
 
     const userData = data.find(

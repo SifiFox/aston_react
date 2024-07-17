@@ -1,5 +1,5 @@
 import type { MovieBase } from "@/app/hooks/use-movies/types"
-import {LoginParams, lsFavourites, LsHistory, LsUser, LsUserCredentials} from "@/app/api/types";
+import type {LoginParams, lsFavourites, LsHistory, LsUser, LsUserCredentials} from "@/app/api/types";
 export const checkAuth = callback => {
     const activeUser = JSON.parse(localStorage.getItem("activeUser"))
     callback(activeUser)
