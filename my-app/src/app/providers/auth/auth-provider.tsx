@@ -3,7 +3,7 @@ import { checkAuth } from "@/shared/api/api"
 import { useAppDispatch } from "@/shared/redux/hooks"
 import { setUser } from "@/shared/redux/store/slices/user-slice"
 import PropTypes from "prop-types"
-import type { ReactNode} from "react";
+import type { ReactNode } from "react"
 import { useEffect, useState } from "react"
 
 interface Props {

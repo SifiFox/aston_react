@@ -3,7 +3,7 @@ import { RoutePath } from "@/shared/config/route-config/route-config"
 import { useAppSelector } from "@/shared/redux/hooks"
 import { Loading } from "@/shared/ui/loading"
 import PropTypes from "prop-types"
-import type { ReactNode} from "react";
+import type { ReactNode } from "react"
 import { useContext } from "react"
 import { Navigate } from "react-router-dom"
 

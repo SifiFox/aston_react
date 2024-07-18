@@ -10,7 +10,7 @@ const initialState = {
 }
 
 const favouritesSlice = createSlice({
-    name: "User",
+    name: "favourites",
     initialState,
     reducers: {
         setFavouritesStore(state, action) {

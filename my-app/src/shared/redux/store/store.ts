@@ -3,11 +3,13 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { setupListeners } from "@reduxjs/toolkit/query"
 
 import favouritesReducer from "./slices/favourites-slice"
+import historyReducer from "./slices/history-slice"
 import userReducer from "./slices/user-slice"
 
 export const rootReducer = combineReducers({
     user: userReducer,
     favourites: favouritesReducer,
+    history: historyReducer,
     [kinopoiskApi.reducerPath]: kinopoiskApi.reducer,
 })
 

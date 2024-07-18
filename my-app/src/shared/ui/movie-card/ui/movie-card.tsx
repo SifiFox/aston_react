@@ -3,6 +3,7 @@ import { setFavourites } from "@/shared/api/api"
 import { RoutePath } from "@/shared/config/route-config/route-config"
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks"
 import { makeGetIsMovieFavourite } from "@/shared/redux/store/selectors/favourites-selector"
+import { useFetchMovieByIdQuery } from "@/shared/redux/store/services/movie-service"
 import {
     addMovie,
     removeMovie,
@@ -25,6 +26,8 @@ export const MovieCard = (props: { movie: MovieBase }) => {
         makeGetIsMovieFavourite()(state.favourites, movie.kinopoiskId),
     )
 
+    const { data, isLoading } = useFetchMovieByIdQuery(movie.kinopoiskId)
+
     const handleClickFavourite = () => {
         if (!isAuth) {
             message.error(
@@ -41,12 +44,12 @@ export const MovieCard = (props: { movie: MovieBase }) => {
             dispatch(addMovie(movie))
         }
     }
-
     return (
         <Card
+            loading={isLoading}
             className={cls.card}
             hoverable
-            cover={<img alt="example" src={movie.posterUrl} />}
+            cover={<img alt="example" src={data?.posterUrl} />}
             actions={[
                 isFavourite ? (
                     <StarFilled onClick={handleClickFavourite} />
@@ -55,8 +58,8 @@ export const MovieCard = (props: { movie: MovieBase }) => {
                 ),
             ]}
         >
-            <Link to={`/${movie.kinopoiskId}`}>
-                <Meta title={movie.nameRu} description={movie.year} />
+            <Link to={`/${data?.kinopoiskId}`}>
+                <Meta title={data?.nameRu} description={data?.year} />
             </Link>
         </Card>
     )

@@ -64,7 +64,9 @@ jobs:
       run:
         working-directory: './my-app'
     steps:
-      - name: Checkout
+      - name: Repository Checkout
         uses: actions/checkout@v4
+      - name: Install Netlify
+        run: npm install netlify-cli@17.10.1 -g
       - name: Build
         run: yarn ci && yarn run build
