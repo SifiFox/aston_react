@@ -24,7 +24,6 @@
 - [x] Использование Storybook [Stories](https://github.com/SifiFox/aston_react/tree/main/my-app/src/shared/stories)
 - [x] Использование Firebase [FirebaseApi](https://github.com/SifiFox/aston_react/blob/main/my-app/src/shared/api/firebase-api/firebase-api.ts)
 - [x] Низкая связанность клиентского кода с хранилищем [Api](https://github.com/SifiFox/aston_react/blob/main/my-app/src/shared/api/api.ts)
-- [x] Реализована виртуализация списков
 - [x] Настроен CI/CD [cicd.yml](https://github.com/SifiFox/aston_react/blob/main/.github/workflows/cicd.yml)
 - [x] Используются мемоизированные селекторы [FavouritesSelector](https://github.com/SifiFox/aston_react/blob/main/my-app/src/shared/redux/store/selectors/favourites-selector.ts)
 
