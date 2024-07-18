@@ -21,7 +21,7 @@
 
 **2 уровень (необязательный)**
 - [x] Использование TypeScript пример: [ApiTypes](https://github.com/SifiFox/aston_react/blob/main/my-app/src/app/api/types.ts) 
-- [ ] Использование Storybook
+- [x] Использование Storybook [Stories](https://github.com/SifiFox/aston_react/tree/main/my-app/src/shared/stories)
 - [x] Использование Firebase [FirebaseApi](https://github.com/SifiFox/aston_react/blob/main/my-app/src/shared/api/firebase-api/firebase-api.ts)
 - [x] Низкая связанность клиентского кода с хранилищем [Api](https://github.com/SifiFox/aston_react/blob/main/my-app/src/shared/api/api.ts)
 - [x] Реализована виртуализация списков
