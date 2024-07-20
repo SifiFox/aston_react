@@ -2,6 +2,7 @@ import { useAuth } from "@/features/auth/hooks/use-auth"
 import { loginWithGoogle } from "@/shared/api/api"
 import { RoutePath } from "@/shared/config/route-config/route-config"
 import { useAppSelector } from "@/shared/redux/hooks"
+import { getUserSelector } from "@/shared/redux/store/selectors/user-selector"
 import { AppForm } from "@/widgets/app-form"
 import { Header } from "@/widgets/header"
 import { type PageProps } from "@pages/types/types"
@@ -10,7 +11,7 @@ import { RegistrationForm } from "@pages/ui/registration-page/ui/registration-fo
 import { Navigate } from "react-router-dom"
 
 export const RegistrationPage = ({ title }: PageProps) => {
-    const { isAuth } = useAppSelector(state => state.user)
+    const { isAuth } = useAppSelector(getUserSelector)
     const { handleRegistration } = useAuth()
 
     const loginGoogle = () => {

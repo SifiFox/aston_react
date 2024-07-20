@@ -1,21 +1,21 @@
 .searchWrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .result {
-  display: flex;
-  gap: 20px;
-  position: absolute;
-  top: 120%;
-  overflow-x: auto;
-  width: 100%;
-  padding: 20px;
-  background: #fff;
-  border-radius: 5px;
-  z-index: 3;
+    display: flex;
+    gap: 20px;
+    position: absolute;
+    top: 120%;
+    overflow-x: auto;
+    width: 100%;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    z-index: 3;
 }
 
 /*# sourceMappingURL=search.module.css.map */

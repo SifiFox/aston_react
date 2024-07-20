@@ -5,7 +5,7 @@ import { MainPageAsync } from "@pages/ui/main-page"
 import { MoviePageAsync } from "@pages/ui/movie-page"
 import { NotFoundPage } from "@pages/ui/not-found-page"
 import { RegistrationPage } from "@pages/ui/registration-page"
-import { SearchPage } from "@pages/ui/search-page/ui/search-page"
+import { SearchPageAsync } from "@pages/ui/search-page"
 import type { RouteProps } from "react-router-dom"
 
 export type AppRoutesProps = RouteProps & {
@@ -47,9 +47,9 @@ export const RouteConfig: Record<AppRoutes, AppRoutesProps> = {
         element: <MoviePageAsync title="Фильм" />,
     },
     [AppRoutes.SEARCH]: {
-        path: `${RoutePath.search}/:keyword`,
+        path: `${RoutePath.search}`,
         title: "Поиск",
-        element: <SearchPage title="Поиск" />,
+        element: <SearchPageAsync title="Поиск" />,
     },
 
     [AppRoutes.LOGIN]: {

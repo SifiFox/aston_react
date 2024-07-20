@@ -1,6 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { type PayloadAction } from "@reduxjs/toolkit"
+import { type Nullable } from "vitest"
 
-const initialState = {
+export interface UserState {
+    id: Nullable<number | string>
+    token: Nullable<string>
+    isAuth: boolean
+    email?: string
+}
+
+const initialState: UserState = {
     id: null,
     token: null,
     isAuth: false,
@@ -10,15 +19,11 @@ const userSlice = createSlice({
     name: "User",
     initialState,
     reducers: {
-        setUser(state, action) {
-            state.id = action.payload.id
-            state.token = action.payload.token
-            state.isAuth = true
+        setUser(state: UserState, action: PayloadAction<UserState>) {
+            return { ...state, ...action.payload }
         },
-        removeUser(state) {
-            state.id = null
-            state.token = null
-            state.isAuth = false
+        removeUser() {
+            return { ...initialState }
         },
     },
 })

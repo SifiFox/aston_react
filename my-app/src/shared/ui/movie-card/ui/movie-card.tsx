@@ -3,6 +3,7 @@ import { setFavourites } from "@/shared/api/api"
 import { RoutePath } from "@/shared/config/route-config/route-config"
 import { useAppDispatch, useAppSelector } from "@/shared/redux/hooks"
 import { makeGetIsMovieFavourite } from "@/shared/redux/store/selectors/favourites-selector"
+import { getUserSelector } from "@/shared/redux/store/selectors/user-selector"
 import { useFetchMovieByIdQuery } from "@/shared/redux/store/services/movie-service"
 import {
     addMovie,
@@ -20,8 +21,8 @@ export const MovieCard = (props: { movie: MovieBase }) => {
     const { movie } = props
     const navigation = useNavigate()
     const dispatch = useAppDispatch()
+    const { isAuth } = useAppSelector(getUserSelector)
 
-    const { isAuth } = useAppSelector(state => state.user)
     const isFavourite = useAppSelector(state =>
         makeGetIsMovieFavourite()(state.favourites, movie.kinopoiskId),
     )
@@ -50,16 +51,21 @@ export const MovieCard = (props: { movie: MovieBase }) => {
             className={cls.card}
             hoverable
             cover={<img alt="example" src={data?.posterUrl} />}
-            actions={[
-                isFavourite ? (
-                    <StarFilled onClick={handleClickFavourite} />
-                ) : (
-                    <StarOutlined onClick={handleClickFavourite} />
-                ),
-            ]}
+            actions={
+                isAuth && [
+                    isFavourite ? (
+                        <StarFilled onClick={handleClickFavourite} />
+                    ) : (
+                        <StarOutlined onClick={handleClickFavourite} />
+                    ),
+                ]
+            }
         >
             <Link to={`/${data?.kinopoiskId}`}>
-                <Meta title={data?.nameRu} description={data?.year} />
+                <Meta
+                    title={data?.nameRu ?? data?.nameEn ?? data?.nameOriginal}
+                    description={data?.year}
+                />
             </Link>
         </Card>
     )

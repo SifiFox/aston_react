@@ -1,5 +1,12 @@
+import type {
+    LoginParams,
+    LsHistory,
+    LsUser,
+    LsUserCredentials,
+    lsFavourites,
+} from "@/app/api/types"
 import type { MovieBase } from "@/app/hooks/use-movies/types"
-import type {LoginParams, lsFavourites, LsHistory, LsUser, LsUserCredentials} from "@/app/api/types";
+
 export const checkAuth = callback => {
     const activeUser = JSON.parse(localStorage.getItem("activeUser"))
     callback(activeUser)
@@ -7,7 +14,7 @@ export const checkAuth = callback => {
 }
 
 export const loginWithGoogle = async () => {
-    return 'Unsupported feature'
+    return "Unsupported feature"
 }
 
 export const login = async ({ email, password }: LoginParams) => {
@@ -25,6 +32,13 @@ export const login = async ({ email, password }: LoginParams) => {
             localStorage.setItem("activeUser", JSON.stringify(activeUser))
             return activeUser
         }
+        if (!user) {
+            throw new Error("Пользователь не найден")
+        }
+
+        if (user && user.password !== password) {
+            throw new Error("Неверный пароль")
+        }
     } else {
         throw new Error("Что-то пошло не так")
     }
@@ -35,7 +49,7 @@ export const registration = async ({ email, password }: LoginParams) => {
     users?.sort((a, b) => a.uid - b.uid)
     const lastId = users ? users[users.length - 1].uid : 0
 
-    const newUser = [
+    const newUserArray: LsUser[] = [
         {
             uid: lastId + 1,
             email,
@@ -48,10 +62,15 @@ export const registration = async ({ email, password }: LoginParams) => {
         if (isUserExist) {
             throw new Error("Пользователь уже существует")
         }
-        localStorage.setItem("users", JSON.stringify([...users, ...newUser]))
+        localStorage.setItem(
+            "users",
+            JSON.stringify([...users, ...newUserArray]),
+        )
     } else {
-        localStorage.setItem("users", JSON.stringify(newUser))
+        localStorage.setItem("users", JSON.stringify(newUserArray))
     }
+
+    return newUserArray[0]
 }
 
 export const logout = () => {
@@ -78,7 +97,9 @@ export const getHistoryByUser = async (userId: number | string) => {
 
 export const setFavourites = async (movie: MovieBase) => {
     const activeUser: LsUser = JSON.parse(localStorage.getItem("activeUser"))
-    const activeUserFavourites: lsFavourites = await getFavouritesByUser(activeUser.uid)
+    const activeUserFavourites: lsFavourites = await getFavouritesByUser(
+        activeUser.uid,
+    )
     const allFavourites = localStorage.getItem("favourites")
 
     if (!allFavourites) {
@@ -222,7 +243,6 @@ export const removeFromHistory = async (request: string) => {
     )
 }
 
-
 export const clearHistory = async () => {
     const activeUser: LsUser = JSON.parse(localStorage.getItem("activeUser"))
     const activeUserHistory: LsHistory = await getHistoryByUser(activeUser.uid)
@@ -242,4 +262,3 @@ export const clearHistory = async () => {
         )
     }
 }
-

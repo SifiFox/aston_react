@@ -1,7 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit"
 
+export interface Request {
+    request: string
+}
+
 export interface HistoryState {
-    requests: string[]
+    requests: Request[]
 }
 
 const initialState = {
@@ -16,12 +20,15 @@ const historySlice = createSlice({
             state.requests = action.payload
         },
         removeRequestFromHistory(state, action) {
-            state.requests = state.requests.filter(
+            const filteredHistory = state.requests.filter(
                 item => String(item.request) !== String(action.payload.request),
             )
+            if (filteredHistory) {
+                state.requests = filteredHistory
+            }
         },
         clearHistoryStore(state) {
-            state.requests = []
+            return { ...initialState }
         },
     },
 })

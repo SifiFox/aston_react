@@ -9,14 +9,20 @@ export const ResultList = ({ movies }: { movies: MovieBase[] }) => {
                 return (
                     <Link key={movie.kinopoiskId} to={`/${movie.kinopoiskId}`}>
                         <Card
-                            style={{ height: 350, width: 200 }}
+                            style={{
+                                height: 440,
+                                width: 200,
+                                overflow: "hidden",
+                            }}
                             cover={
                                 <img
                                     alt="example"
                                     src={movie.posterUrlPreview}
                                 />
                             }
-                        ></Card>
+                        >
+                            <p>{movie.nameOriginal}</p>
+                        </Card>
                     </Link>
                 )
             })}

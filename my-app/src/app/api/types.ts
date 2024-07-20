@@ -1,5 +1,5 @@
-import type {Nullable} from "vitest";
-import type {MovieBase} from "@/app/hooks/use-movies/types";
+import type { MovieBase, MovieDetails } from "@/app/hooks/use-movies/types"
+import type { Nullable } from "vitest"
 
 export type Strings = Record<string, string>
 
@@ -9,28 +9,27 @@ export enum ApiTypes {
 }
 
 export interface firebaseData {
-    userId: number | string,
-    favourites: string[],
+    userId: number | string
+    favourites: string[]
     history: string[]
 }
 
 export interface LoginParams {
-    email: string,
+    email: string
     password: string
 }
 
 export interface LsUserCredentials {
-    uid: number | string,
-    email: string,
-    accessToken: number | string,
+    uid: number | string
+    email: string
+    accessToken: number | string
 }
 
 export interface LsUser {
-    uid: number | string,
-    email: string,
+    uid: number | string
+    email: string
     password: string
 }
-
 
 export interface lsFavourites {
     movies: MovieBase[]
@@ -46,18 +45,18 @@ export interface LsHistory {
     history: HistoryRequest[]
 }
 
-type UnknownPromise = Promise<unknown> | Error;
+type UnknownPromise = Promise<unknown> | Error
 
 export type apiFunctions = {
-    checkAuth: (callback: () => void) => Nullable<unknown>,
-    loginWithGoogle: () => Promise<unknown>,
-    login: ({email, password}: LoginParams) => UnknownPromise,
-    registration: ({email, password}: LoginParams) => UnknownPromise,
-    logout: () => void,
-    getFavouritesByUser: (id: number | string) => UnknownPromise,
-    getHistoryByUser: (id: number | string) => UnknownPromise,
-    setFavourites: (movie: MovieBase) => Promise<void>,
-    setHistory: (request: string) => Promise<void>,
-    removeFromHistory: (request: string) => Promise<void>,
+    checkAuth: (callback: () => void) => Nullable<unknown>
+    loginWithGoogle: () => Promise<unknown>
+    login: ({ email, password }: LoginParams) => UnknownPromise
+    registration: ({ email, password }: LoginParams) => Promise<LsUser>
+    logout: () => void
+    getFavouritesByUser: (id: number | string) => UnknownPromise
+    getHistoryByUser: (id: number | string) => UnknownPromise
+    setFavourites: (movie: MovieBase | MovieDetails) => Promise<void>
+    setHistory: (request: string) => Promise<void>
+    removeFromHistory: (request: string) => Promise<void>
     clearHistory: () => Promise<void>
 }

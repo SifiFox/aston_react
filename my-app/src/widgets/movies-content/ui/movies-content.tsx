@@ -1,5 +1,6 @@
 import { MoviesList } from "@/widgets/movies-content/ui/movies-list"
 import cls from "@pages/ui/page.module.scss"
+import { Typography } from "antd"
 
 export const MoviesContent = ({ movies, moviesCount, isError }) => {
     if (isError) {
@@ -13,6 +14,9 @@ export const MoviesContent = ({ movies, moviesCount, isError }) => {
                     <h3>Всего: </h3>
                     <p>{moviesCount}</p>
                 </div>
+            )}
+            {moviesCount === 0 && (
+                <Typography.Title>Нет фильмов</Typography.Title>
             )}
             {movies?.length > 0 && <MoviesList movies={movies} />}
         </>

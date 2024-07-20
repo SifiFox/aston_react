@@ -1,15 +1,30 @@
+import { useFavourites } from "@/features/favourites/hooks/use-favourites"
+import { useHistory } from "@/features/history/hooks/use-history"
 import { useFetchMoviesByKeywordQuery } from "@/shared/redux/store/services/movie-service"
 import { ErrorFallback } from "@/shared/ui/error-fallback"
-import { Loading } from "@/shared/ui/loading"
 import { Header } from "@/widgets/header"
 import { MoviesContent } from "@/widgets/movies-content"
+import { SearchComponent } from "@/widgets/search"
 import cls from "@pages/ui/page.module.scss"
+import { memo } from "react"
 import { ErrorBoundary } from "react-error-boundary"
-import { useParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 
-export const SearchPage = ({ title }) => {
-    const { keyword } = useParams()
-    const { data, isLoading, isError } = useFetchMoviesByKeywordQuery(keyword)
+const SearchPage = ({ title }) => {
+    const [searchParams] = useSearchParams()
+    const keyword = searchParams.get("keyword")
+    const { movies, moviesCount, isError } = useFetchMoviesByKeywordQuery(
+        keyword,
+        {
+            selectFromResult: ({ data, isError }) => ({
+                movies: data?.movies,
+                moviesCount: data?.moviesCount,
+                isError: isError,
+            }),
+        },
+    )
+    useFavourites()
+    useHistory()
 
     return (
         <>
@@ -18,17 +33,16 @@ export const SearchPage = ({ title }) => {
                 <h1 className={cls.pageTitle}>{title}</h1>
                 <div className={cls.pageContent}>
                     <ErrorBoundary FallbackComponent={ErrorFallback}>
-                        {isLoading && <Loading />}
-                        {data && (
-                            <MoviesContent
-                                movies={data.movies}
-                                moviesCount={data.moviesCount}
-                                isError={isError}
-                            />
-                        )}
+                        <SearchComponent />
+                        <MoviesContent
+                            movies={movies}
+                            moviesCount={moviesCount}
+                            isError={isError}
+                        />
                     </ErrorBoundary>
                 </div>
             </div>
         </>
     )
 }
+export default memo(SearchPage)

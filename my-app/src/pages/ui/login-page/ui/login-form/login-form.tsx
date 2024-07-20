@@ -1,8 +1,8 @@
+import { type Strings } from "@/app/api/types"
 import { RoutePath } from "@/shared/config/route-config/route-config"
 import { GoogleOutlined, LockOutlined, UserOutlined } from "@ant-design/icons"
 import { Button, Checkbox, Form, Input } from "antd"
 import { Link } from "react-router-dom"
-import {type Strings} from "@/app/api/types";
 
 interface LoginFormProps {
     formAction: (values) => void
