@@ -61,12 +61,11 @@ export const MovieCard = (props: { movie: MovieBase }) => {
                 ]
             }
         >
-            <Link to={`/${data?.kinopoiskId}`}>
-                <Meta
-                    title={data?.nameRu ?? data?.nameEn ?? data?.nameOriginal}
-                    description={data?.year}
-                />
-            </Link>
+            <Link to={`/${data?.kinopoiskId}`}>Подробнее</Link>
+            <Meta
+                title={data?.nameRu ?? data?.nameEn ?? data?.nameOriginal}
+                description={data?.year}
+            />
         </Card>
     )
 }
