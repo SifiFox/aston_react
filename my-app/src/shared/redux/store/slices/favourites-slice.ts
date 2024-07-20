@@ -20,15 +20,25 @@ const favouritesSlice = createSlice({
             state.movies = [...state.movies, action.payload]
         },
         removeMovie(state, action) {
-            state.movies = state.movies.filter(
+            const filteredMovies = state.movies.filter(
                 movie =>
                     String(movie.kinopoiskId) !==
                     String(action.payload.kinopoiskId),
             )
+            if (filteredMovies) {
+                state.movies = filteredMovies
+            }
+        },
+        clearFavouritesStore() {
+            return { ...initialState }
         },
     },
 })
 
-export const { setFavouritesStore, removeMovie, addMovie } =
-    favouritesSlice.actions
+export const {
+    setFavouritesStore,
+    removeMovie,
+    addMovie,
+    clearFavouritesStore,
+} = favouritesSlice.actions
 export default favouritesSlice.reducer

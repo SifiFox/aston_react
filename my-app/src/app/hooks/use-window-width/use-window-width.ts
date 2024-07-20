@@ -1,6 +1,11 @@
 import React from "react"
 
-export function useWindowWidth() {
+interface UseWindowWidth {
+    windowWidth: number
+    isDesktop: boolean
+}
+
+export function useWindowWidth(): UseWindowWidth {
     const [windowWidth, setWindowWidth] = React.useState(0)
 
     React.useLayoutEffect(() => {

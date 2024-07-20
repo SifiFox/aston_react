@@ -1,6 +1,7 @@
 import { AuthContext } from "@/app/providers/auth/auth-context"
 import { RoutePath } from "@/shared/config/route-config/route-config"
 import { useAppSelector } from "@/shared/redux/hooks"
+import { getUserSelector } from "@/shared/redux/store/selectors/user-selector"
 import { Loading } from "@/shared/ui/loading"
 import PropTypes from "prop-types"
 import type { ReactNode } from "react"
@@ -13,7 +14,7 @@ interface Props {
 
 export const RequireAuth = ({ children }: Props) => {
     const { isLoading } = useContext(AuthContext)
-    const { isAuth } = useAppSelector(state => state.user)
+    const { isAuth } = useAppSelector(getUserSelector)
 
     if (isLoading) {
         return <Loading />

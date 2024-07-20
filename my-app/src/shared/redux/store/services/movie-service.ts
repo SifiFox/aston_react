@@ -1,7 +1,8 @@
 import { BASE_API_URL } from "@/app/api/api"
-import type { MoviesBase } from "@/app/hooks/use-movies/types"
+import { type MoviesBase } from "@/app/hooks/use-movies/types"
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
+// TODO: Писал про это, почему-то IDE дико ругается на Endpoint-ы. Всё работает, но ,к сожалению, не удалось устранить ошибку типизации
 export const kinopoiskApi = createApi({
     reducerPath: "kinopoisk",
     baseQuery: fetchBaseQuery({
@@ -27,7 +28,7 @@ export const kinopoiskApi = createApi({
             query: (word): { url: string } => ({
                 url: `/films?keyword=${word}`,
             }),
-            transformResponse: (response: MoviesBase) => ({
+            transformResponse: (response: MoviesBase, meta, arg) => ({
                 movies: response.items,
                 moviesCount: response.total,
                 moviesPages: response.totalPages,

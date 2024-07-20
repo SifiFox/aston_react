@@ -1,6 +1,11 @@
 import { BASE_API_URL } from "@/app/api/api"
 import { getFullQuery } from "@/app/hooks/use-movies/helpers"
-import type { Postfixes } from "@/app/hooks/use-movies/types"
+import type {
+    MovieBase,
+    MovieDetails,
+    Postfixes,
+} from "@/app/hooks/use-movies/types"
+import { message } from "antd"
 import { useEffect, useState } from "react"
 
 export interface APIParams {
@@ -8,9 +13,8 @@ export interface APIParams {
     postfix?: Postfixes
 }
 
-export function useMovies(params: APIParams): unknown {
+export function useMovies(params: APIParams): MovieBase[] | MovieDetails {
     const [movies, setMovies] = useState([])
-
     const fullQuery = getFullQuery({
         base: `${BASE_API_URL}/films`,
         params: params,
@@ -28,7 +32,7 @@ export function useMovies(params: APIParams): unknown {
             .then(json => {
                 setMovies(json)
             })
-            .catch(err => console.log(err))
+            .catch(err => message.error(err.message))
     }, [fullQuery])
 
     return movies

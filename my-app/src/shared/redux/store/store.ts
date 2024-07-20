@@ -1,5 +1,10 @@
 import { kinopoiskApi } from "@/shared/redux/store/services/movie-service"
-import { combineReducers, configureStore } from "@reduxjs/toolkit"
+import searchReducer from "@/shared/redux/store/slices/search-slice"
+import {
+    combineReducers,
+    configureStore,
+    createDraftSafeSelector,
+} from "@reduxjs/toolkit"
 import { setupListeners } from "@reduxjs/toolkit/query"
 
 import favouritesReducer from "./slices/favourites-slice"
@@ -10,6 +15,7 @@ export const rootReducer = combineReducers({
     user: userReducer,
     favourites: favouritesReducer,
     history: historyReducer,
+    search: searchReducer,
     [kinopoiskApi.reducerPath]: kinopoiskApi.reducer,
 })
 
@@ -33,3 +39,6 @@ setupListeners(next)
 export type RootState = ReturnType<typeof rootReducer>
 export type AppStore = ReturnType<typeof setupStore>
 export type AppDispatch = AppStore["dispatch"]
+export const selfSelect = (state: RootState) => state
+export const createTypedDraftSafeSelector =
+    createDraftSafeSelector.withTypes<RootState>()

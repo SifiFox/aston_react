@@ -4,7 +4,7 @@ import { useAppDispatch } from "@/shared/redux/hooks"
 import { setUser } from "@/shared/redux/store/slices/user-slice"
 import PropTypes from "prop-types"
 import type { ReactNode } from "react"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 interface Props {
     children: ReactNode
@@ -23,6 +23,7 @@ export const AuthProvider = ({ children }: Props) => {
                             setUser({
                                 id: user.uid,
                                 token: user.accessToken,
+                                isAuth: true,
                             }),
                         )
                         setIsAuth(true)
@@ -53,12 +54,12 @@ export const AuthProvider = ({ children }: Props) => {
         /* eslint-disable react-hooks/exhaustive-deps*/
     }, [])
 
-    return (
-        <AuthContext.Provider
-            value={{ isAuth: isAuth, isLoading: isLoading }}
-            children={children}
-        />
+    const defaultProps = useMemo(
+        () => ({ isAuth: isAuth, isLoading: isLoading }),
+        [isAuth, isLoading],
     )
+
+    return <AuthContext.Provider value={defaultProps} children={children} />
 }
 
 AuthProvider.propTypes = {

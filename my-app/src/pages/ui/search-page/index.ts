@@ -1,1 +1,1 @@
-export { SearchPage } from "./ui/search-page"
+export { SearchPageAsync } from "./ui/search-page.async"

@@ -2,6 +2,7 @@ import { useAuth } from "@/features/auth/hooks/use-auth"
 import { loginWithGoogle } from "@/shared/api/api"
 import { RoutePath } from "@/shared/config/route-config/route-config"
 import { useAppSelector } from "@/shared/redux/hooks"
+import { getUserSelector } from "@/shared/redux/store/selectors/user-selector"
 import { AppForm } from "@/widgets/app-form"
 import { Header } from "@/widgets/header"
 import { type PageProps } from "@pages/types/types"
@@ -10,7 +11,7 @@ import cls from "@pages/ui/page.module.scss"
 import { Navigate } from "react-router-dom"
 
 export const LoginPage = ({ title }: PageProps) => {
-    const { isAuth } = useAppSelector(state => state.user)
+    const { isAuth } = useAppSelector(getUserSelector)
     const { handleLogin } = useAuth()
 
     const loginGoogle = () => {
