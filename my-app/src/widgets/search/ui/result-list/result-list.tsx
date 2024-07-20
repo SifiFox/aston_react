@@ -21,7 +21,7 @@ export const ResultList = ({ movies }: { movies: MovieBase[] }) => {
                                 />
                             }
                         >
-                            <p>{movie.nameOriginal}</p>
+                            <p>{movie.nameOriginal ?? movie.nameEn ?? movie.nameRu}</p>
                         </Card>
                     </Link>
                 )
