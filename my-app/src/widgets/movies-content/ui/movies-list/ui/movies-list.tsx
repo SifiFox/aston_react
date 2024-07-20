@@ -8,7 +8,7 @@ export const MoviesList = ({ movies }: { movies: MovieBase[] }) => {
     return (
         <div className={cls.moviesList}>
             {movies.map((item: MovieBase, index) => {
-                return <MovieCard movie={item} key={index} />
+                return <MovieCard movie={item} key={item.kinopoiskId} />
             })}
         </div>
     )

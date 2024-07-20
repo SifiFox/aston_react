@@ -17,7 +17,7 @@ export const Navbar = () => {
             <ul className={cls.navbar}>
                 {navbarItems.map((item, index) => {
                     return (
-                        <li key={index}>
+                        <li key={item.path}>
                             <Link
                                 to={item.path ?? "/"}
                                 className={classNames(
