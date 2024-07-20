@@ -1,5 +1,13 @@
+**BooMovies**
+Приложение для просмотра информации о фильмах.
+
+**Используемое API**: [kinopoiskApi](https://kinopoiskapiunofficial.tech/)
+**Deploy**: [BooMovies](aston-react-boomovie.netlify.app/)
+
+
 **Что сделано**
 **1 уровень (обязательный - необходимый минимум)**
+- React
 - [x] Реализованы Требования к функциональности
 - [x] Для хранения учетных записей пользователей, их Избранного и Истории поиска, используем LocalStorage [LsApi](https://github.com/SifiFox/aston_react/tree/main/my-app/src/shared/api/ls-api)
 - [x] Пишем функциональные компоненты c хуками в приоритете над классовыми
@@ -14,6 +22,7 @@
 - [x] Хотя бы несколько компонентов используют PropTypes  [AuthProvider](https://github.com/SifiFox/aston_react/blob/main/my-app/src/app/providers/auth/auth-provider.tsx) [MainPage](https://github.com/SifiFox/aston_react/blob/main/my-app/src/pages/ui/main-page/ui/main-page.tsx) [RequireAuth](https://github.com/SifiFox/aston_react/blob/main/my-app/src/app/providers/router/require-auth.tsx)
 - [x] Поиск не должен триггерить много запросов к серверу (debounce) [Search](https://github.com/SifiFox/aston_react/blob/main/my-app/src/widgets/search/ui/search.tsx)
 - [x] Есть применение lazy + Suspense [AppRouter](https://github.com/SifiFox/aston_react/blob/main/my-app/src/app/providers/router/app-router.tsx)
+- Redux
 - [x] Используем Modern Redux with Redux Toolkit
 - [x] Используем слайсы [Slices](https://github.com/SifiFox/aston_react/tree/main/my-app/src/shared/redux/store/slices)
 - [x] Используется RTK Query [MovieService](https://github.com/SifiFox/aston_react/tree/main/my-app/src/shared/redux/store/services)
@@ -31,3 +40,5 @@
 
 **Прочее**
 - авторизация через google;
+- архитектура FSD;
+- Ant design
