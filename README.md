@@ -2,7 +2,7 @@
 Приложение для просмотра информации о фильмах.
 
 - **Используемое API**: [kinopoiskApi](https://kinopoiskapiunofficial.tech/)
-- **Deploy**: [BooMovies](aston-react-boomovie.netlify.app/)
+- **Deploy**: [BooMovies](https://aston-react-boomovie.netlify.app/)
 
 
 **Что сделано**
