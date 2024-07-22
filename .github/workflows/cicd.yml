@@ -22,7 +22,7 @@ jobs:
         runs-on: ubuntu-latest
         defaults:
             run:
-                working-directory: "./my-app"
+                working-directory: "./"
         steps:
             - name: get repository code
               uses: actions/checkout@v4
@@ -44,7 +44,7 @@ jobs:
         needs: eslint
         defaults:
             run:
-                working-directory: "./my-app"
+                working-directory: "./"
         steps:
             - name: get repository code
               uses: actions/checkout@v4
@@ -62,7 +62,7 @@ jobs:
         needs: [eslint, prettier]
         defaults:
             run:
-                working-directory: "./my-app"
+                working-directory: "./"
         steps:
             - name: Repository Checkout
               uses: actions/checkout@v4
